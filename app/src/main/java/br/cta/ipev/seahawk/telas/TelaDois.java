@@ -20,13 +20,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.cta.ipev.seahawk.AppManager;
+import br.cta.ipev.seahawk.AtmosferaUtils;
 import br.cta.ipev.seahawk.databinding.ActivityTelaDoisBinding;
 import br.cta.isad.Display;
 
 public class TelaDois extends AppCompatActivity implements Display {
     private ActivityTelaDoisBinding binding;
     private boolean isTablet;
-    double somaPeso;
+    private final AtmosferaUtils atm = new AtmosferaUtils();
+    private double somaPeso;
+    private LineDataSet dsAlvo, dsCorrigido, dsSup1, dsInf1, dsSup2, dsInf2;
 
 
     @Override
@@ -43,264 +46,143 @@ public class TelaDois extends AppCompatActivity implements Display {
         super.onCreate(savedInstanceState);
         setLayout();
         init();
+        setupChart();
+        setListeners();
+    }
 
-        TextWatcher calculoTudo = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                calcularTudo();  // dispara sempre que algum campo muda
-            }
-        };
-
-        TextWatcher calculoPeso = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                calcularPeso();  // dispara sempre que algum campo muda
-            }
-        };
-
+    private void setListeners() {
+        TextWatcher calculoPeso = new SimpleTextWatcher(this::calcularPeso);
+        TextWatcher calculoTudo = new SimpleTextWatcher(this::calcularTudo);
 
         binding.textEditPesoInicial.addTextChangedListener(calculoPeso);
         binding.textEditLastro.addTextChangedListener(calculoPeso);
         binding.textEditFuel.addTextChangedListener(calculoPeso);
+
         binding.textEditAtt.addTextChangedListener(calculoTudo);
         binding.textEditTemp.addTextChangedListener(calculoTudo);
         binding.textEditAlvo.addTextChangedListener(calculoTudo);
+    }
 
+    private static class SimpleTextWatcher implements TextWatcher {
+        private final Runnable callback;
+        SimpleTextWatcher(Runnable callback) { this.callback = callback; }
+        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        @Override public void afterTextChanged(Editable s) { callback.run(); }
     }
 
     private void calcularPeso() {
-        String pesoStr = binding.textEditPesoInicial.getText().toString().trim();
-        String lastroStr = binding.textEditLastro.getText().toString().trim();
-        String fuelStr = binding.textEditFuel.getText().toString().trim();
-
-        // Só executa se todos os campos estiverem preenchidos
-        if (pesoStr.isEmpty() || lastroStr.isEmpty() || fuelStr.isEmpty()) {
-            return;
-        }
-
         try {
-            double peso_inicial = Double.parseDouble(pesoStr);
-            double lastro = Double.parseDouble(lastroStr);
-            double fuel = Double.parseDouble(fuelStr);
-            somaPeso = peso_inicial + fuel + lastro;
+            double pesoInicial = parseDouble(binding.textEditPesoInicial);
+            double lastro = parseDouble(binding.textEditLastro);
+            double fuel = parseDouble(binding.textEditFuel);
+            somaPeso = pesoInicial + fuel + lastro;
 
             binding.textEditPesoTotal.setText(String.format(Locale.US, "%.0f", somaPeso));
-
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Erro ao converter números.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+            calcularTudo();
+        } catch (Exception e) {
+            Toast.makeText(this, "Erro ao calcular peso.", Toast.LENGTH_SHORT).show();
         }
-
-        calcularTudo();
     }
 
     private void calcularTudo() {
-
-        String str_altitude = binding.textEditAtt.getText().toString().trim();
-        String tempo = binding.textEditTemp.getText().toString().trim();
-        // Só executa se todos os campos estiverem preenchidos
-        if (str_altitude.isEmpty() || tempo.isEmpty()) {
-            return;
-        }
-
         try {
-            double altitude = Double.parseDouble(binding.textEditAtt.getText().toString().trim());
-            double paValor = calcularPa(altitude);
+            double altitudeFt = parseDouble(binding.textEditAtt);
+            double tempC = parseDouble(binding.textEditTemp);
+            double pesoAlvo = parseDouble(binding.textEditAlvo);
 
-            double temp = Double.parseDouble(binding.textEditTemp.getText().toString().trim());
-            double kValor = calcularK(temp);
+            if (altitudeFt == 0 || tempC == 0 || pesoAlvo == 0) return;
 
-            double R = 287.053;
-            double rho = calcularRho(paValor, kValor, R);
-            double sigma = calcularSigma(rho);
-
-            binding.textEditSigma.setText(String.format(Locale.US, "%.6f", sigma));
+            double pa = atm.calcularPa(altitudeFt);
+            double k = atm.calcularK(tempC);
+            double rho = atm.calcularRho(pa, k);
+            double rho2 = atm.calcularRho2(somaPeso, pesoAlvo);
+            double sigma = atm.calcularSigma(rho);
 
             double pesoCorrigido = somaPeso / sigma;
+            double altMeta = atm.calcularPaux(k, pa, rho2, altitudeFt);
+
+            binding.textEditSigma.setText(String.format(Locale.US, "%.6f", sigma));
             binding.textEditPesoCorrigido.setText(String.format(Locale.US, "%.0f", pesoCorrigido));
+            binding.textEditAltMeta.setText(String.format(Locale.US, "%.0f", altMeta));
+            binding.textEditTempMeta.setText(String.format(Locale.US, "%.1f", atm.TempMeta - 273.15));
 
-            setarPesoAlvo(pesoCorrigido);
-
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Erro ao converter números.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+            atualizarGrafico(pesoAlvo, pesoCorrigido);
+        } catch (Exception e) {
+            Toast.makeText(this, "Erro nos cálculos.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void setarPesoAlvo(double pesoCorrigido) {
-
-        String str_pesoAlvo = binding.textEditAlvo.getText().toString().trim();
-
-        // Só executa se todos os campos estiverem preenchidos
-        if (str_pesoAlvo.isEmpty()) {
-            // Opcional: avisa o usuário
-            Toast.makeText(this, "Preencha todos os campos: pesoAlvo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        double pesoAlvo = Double.parseDouble(binding.textEditAlvo.getText().toString().trim());
-        adicionarPontoAoGrafico(pesoAlvo, pesoCorrigido);
+    private double parseDouble(android.widget.EditText e) {
+        String s = e.getText().toString().trim();
+        return s.isEmpty() ? 0 : Double.parseDouble(s);
     }
 
-    private void adicionarPontoAoGrafico(double pesoAlvo_, double pesoCorrigido_) {
-        ArrayList<Entry> entradasA = new ArrayList<>();
-        ArrayList<Entry> entradasB = new ArrayList<>();
-        ArrayList<Entry> entradaLimiteSuperior1 = new ArrayList<>();
-        ArrayList<Entry> entradaLimiteInferior1 = new ArrayList<>();
+    private void setupChart() {
+        dsAlvo = makeDataSet(new ArrayList<>(), "Peso Alvo", Color.GREEN, 2f, false);
+        dsCorrigido = makeDataSet(new ArrayList<>(), "Peso Corrigido", Color.BLUE, 1f, true);
+        dsSup1 = makeDashedSet(new ArrayList<>(), "+1% Limite", Color.MAGENTA);
+        dsInf1 = makeDashedSet(new ArrayList<>(), "-1% Limite", Color.MAGENTA);
+        dsSup2 = makeDashedSet(new ArrayList<>(), "+2% Limite", Color.RED);
+        dsInf2 = makeDashedSet(new ArrayList<>(), "-2% Limite", Color.RED);
 
-        ArrayList<Entry> entradaLimiteSuperior2 = new ArrayList<>();
-        ArrayList<Entry> entradaLimiteInferior2 = new ArrayList<>();
+        LineData lineData = new LineData(dsAlvo, dsCorrigido, dsSup1, dsInf1, dsSup2, dsInf2);
+        binding.lineChart.setData(lineData);
+        binding.lineChart.getDescription().setEnabled(false);
+        binding.lineChart.getAxisRight().setEnabled(false);
+        binding.lineChart.setTouchEnabled(false);
 
+        XAxis xAxis = binding.lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawLabels(false);
+        xAxis.setAxisMinimum(-1f);
+        xAxis.setAxisMaximum(1f);
+
+        YAxis yAxis = binding.lineChart.getAxisLeft();
+        yAxis.setDrawGridLines(true);
+    }
+
+    private void atualizarGrafico(double pesoAlvo_, double pesoCorrigido_) {
         float pesoAlvo = (float) pesoAlvo_;
         float pesoCorrigido = (float) pesoCorrigido_;
 
-        // Linha fixa no ponto (0, 5300)
-        entradasA.add(new Entry(-1f, pesoAlvo));
-        entradasA.add(new Entry(0f, pesoAlvo));
-        entradasA.add(new Entry(1f, pesoAlvo));
+        dsAlvo.setValues(java.util.List.of(new Entry(-1f, pesoAlvo), new Entry(1f, pesoAlvo)));
+        dsCorrigido.setValues(java.util.List.of(new Entry(0f, pesoCorrigido)));
 
-        // Ponto dinâmico (0, valor B)
-        entradasB.add(new Entry(0f, pesoCorrigido));
+        float limSup1 = pesoAlvo * 1.01f;
+        float limInf1 = pesoAlvo * 0.99f;
+        float limSup2 = pesoAlvo * 1.02f;
+        float limInf2 = pesoAlvo * 0.98f;
 
-        float limiteSuperior1 = pesoAlvo * 1.01f;
-        float limiteInferior1 = pesoAlvo * 0.99f;
+        dsSup1.setValues(java.util.List.of(new Entry(-1f, limSup1), new Entry(1f, limSup1)));
+        dsInf1.setValues(java.util.List.of(new Entry(-1f, limInf1), new Entry(1f, limInf1)));
+        dsSup2.setValues(java.util.List.of(new Entry(-1f, limSup2), new Entry(1f, limSup2)));
+        dsInf2.setValues(java.util.List.of(new Entry(-1f, limInf2), new Entry(1f, limInf2)));
 
-        float limiteSuperior2 = pesoAlvo * 1.02f;
-        float limiteInferior2 = pesoAlvo * 0.98f;
-
-
-        //Limite de 1%
-        entradaLimiteSuperior1.add(new Entry(-1f, limiteSuperior1));
-        entradaLimiteSuperior1.add(new Entry(1f, limiteSuperior1));
-
-        entradaLimiteInferior1.add(new Entry(-1f, limiteInferior1));
-        entradaLimiteInferior1.add(new Entry(1f, limiteInferior1));
-
-        //Limite de 2%
-        entradaLimiteSuperior2.add(new Entry(-1f, limiteSuperior2));
-        entradaLimiteSuperior2.add(new Entry(1f, limiteSuperior2));
-
-        entradaLimiteInferior2.add(new Entry(-1f, limiteInferior2));
-        entradaLimiteInferior2.add(new Entry(1f, limiteInferior2));
-
-        // DataSet da linha A
-        LineDataSet dataSetA = new LineDataSet(entradasA, "Peso Alvo");
-        dataSetA.setColor(Color.GREEN);
-        dataSetA.setLineWidth(2f);
-        dataSetA.setDrawCircles(false);
-        dataSetA.setDrawValues(false);
-
-        // DataSet da linha B
-        LineDataSet dataSetB = new LineDataSet(entradasB, "Peso Corrigido");
-        dataSetB.setColor(Color.BLUE);
-        dataSetB.setCircleColor(Color.BLUE);
-        dataSetB.setCircleRadius(7f);
-        dataSetB.setDrawValues(true);
-        dataSetB.setLineWidth(1f); // sem linha ligando
-
-        // DataSet da linha de limite superior de 1%
-        LineDataSet dataSetLimiteSup1 = new LineDataSet(entradaLimiteSuperior1, "+1% Limite");
-        dataSetLimiteSup1.setColor(Color.MAGENTA);
-        dataSetLimiteSup1.setLineWidth(1.5f);
-        dataSetLimiteSup1.setDrawCircles(false);
-        dataSetLimiteSup1.setDrawValues(true);
-        dataSetLimiteSup1.enableDashedLine(10f, 10f, 0f);
-        dataSetLimiteSup1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 10f}, 0));
-
-        // DataSet da linha de limite inferior de 1%
-        LineDataSet dataSetLimiteInf1 = new LineDataSet(entradaLimiteInferior1, "-1% Limite");
-        dataSetLimiteInf1.setColor(Color.MAGENTA);
-        dataSetLimiteInf1.setLineWidth(1.5f);
-        dataSetLimiteInf1.setDrawCircles(false);
-        dataSetLimiteInf1.setDrawValues(true);
-
-        dataSetLimiteInf1.enableDashedLine(10f, 10f, 0f);
-        dataSetLimiteInf1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 10f}, 0));
-
-
-        // DataSet da linha de limite superior de 2%
-        LineDataSet dataSetLimiteSup2 = new LineDataSet(entradaLimiteSuperior2, "+2% Limite");
-        dataSetLimiteSup2.setColor(Color.RED);
-        dataSetLimiteSup2.setLineWidth(1.5f);
-        dataSetLimiteSup2.setDrawCircles(false);
-        dataSetLimiteSup2.setDrawValues(true);
-        dataSetLimiteSup2.enableDashedLine(10f, 10f, 0f);
-        dataSetLimiteSup2.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 10f}, 0));
-
-        // DataSet da linha de limite inferior de 2%
-        LineDataSet dataSetLimiteInf2 = new LineDataSet(entradaLimiteInferior2, "-2% Limite");
-        dataSetLimiteInf2.setColor(Color.RED);
-        dataSetLimiteInf2.setLineWidth(1.5f);
-        dataSetLimiteInf2.setDrawCircles(false);
-        dataSetLimiteInf2.setDrawValues(true);
-
-        dataSetLimiteInf2.enableDashedLine(10f, 10f, 0f);
-        dataSetLimiteInf2.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 10f}, 0));
-
-        LineData lineData = new LineData(dataSetA, dataSetB, dataSetLimiteSup1, dataSetLimiteInf1, dataSetLimiteSup2, dataSetLimiteInf2);
-        binding.lineChart.setData(lineData);
-        binding.lineChart.getDescription().setEnabled(false);
-
-        // Eixo X fixo no ponto 0
-        XAxis xAxis = binding.lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-        xAxis.setGranularity(1f);
-        xAxis.setAxisMinimum(-1f);
-        xAxis.setAxisMaximum(1f);
-        xAxis.setDrawLabels(false);
-
-        // Eixo Y com limite de +-200 em relação a A
-        YAxis yAxis = binding.lineChart.getAxisLeft();
-        yAxis.setAxisMinimum(pesoAlvo - 150);
-        yAxis.setAxisMaximum(pesoAlvo + 150);
-        binding.lineChart.getAxisRight().setEnabled(false);
-        binding.lineChart.setTouchEnabled(false);
-        binding.lineChart.animateY(1000);
-        binding.lineChart.invalidate(); // Atualiza
+        binding.lineChart.getAxisLeft().setAxisMinimum((float) (pesoAlvo * 0.975));
+        binding.lineChart.getAxisLeft().setAxisMaximum((float) (pesoAlvo * 1.025));
+        binding.lineChart.notifyDataSetChanged();
+        binding.lineChart.invalidate();
     }
 
-    private double parseDouble(String text) {
-        if (text == null || text.trim().isEmpty()) return 0.0;
-        return Double.parseDouble(text.trim());
+    private LineDataSet makeDataSet(ArrayList<Entry> entries, String label, int color, float width, boolean drawCircle) {
+        LineDataSet ds = new LineDataSet(entries, label);
+        ds.setColor(color);
+        ds.setLineWidth(width);
+        ds.setDrawCircles(drawCircle);
+        ds.setDrawValues(drawCircle);
+        if (drawCircle) ds.setCircleColor(color);
+        return ds;
     }
 
-    // 2. Fórmula de Pa (substitua conforme necessário)
-    private double calcularPa(double altitudeFt) {
-        double base = 1 - 6.87559e-6 * altitudeFt;
-        return 1013.25 * Math.pow(base, 5.25588);
+    private LineDataSet makeDashedSet(ArrayList<Entry> entries, String label, int color) {
+        LineDataSet ds = makeDataSet(entries, label, color, 1.5f, false);
+        ds.enableDashedLine(10f, 10f, 0f);
+        ds.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 10f}, 0));
+        return ds;
     }
 
-    // 3. Fórmula de K (substitua conforme necessário)
-    private double calcularK(double tempCelsius) {
-        // Exemplo: K = temperatura em Kelvin
-        return tempCelsius + 273.15;
-    }
-
-    private double calcularRho(double pa , double tempKelvin, double r) {
-        return pa * 100 / (r * tempKelvin);
-
-    }
-
-    // 4. Fórmula de Sigma (exemplo: Pa / K)
-    private double calcularSigma(double rho) {
-        return rho / 1.225;
-    }
 
     private void setLayout(){
         binding = ActivityTelaDoisBinding.inflate(getLayoutInflater());

@@ -387,6 +387,82 @@ public class Conversion {
     }
 
 
+    public static double lordInt16(int value1, int value2, double c0, double c1) {
+
+        // Extrai byte alto de cada palavra (equivalente ao bitshift(uint16(x), -8))
+        int highByte = (value1 & 0xFFFF) >> 8;
+        int lowByte  = (value2 & 0xFFFF) >> 8;
+
+        // Monta valor 16 bits little-endian
+        int combined = (highByte << 8) | lowByte;
+
+        // Converte para int16 com sinal
+        short signedValue = (short) combined;
+
+        // Aplica calibração linear
+        return c0 + c1 * signedValue;
+    }
+
+    public static double lordUInt16(int value1, int value2, double c0, double c1) {
+
+        int result =
+                (((value1 & 0xFFFF) >> 8) << 8) |
+                        ((value2 & 0xFFFF) >> 8);
+
+        // uint16 → precisa manter sem sinal
+        int unsigned = result & 0xFFFF;
+
+        return c0 + c1 * unsigned;
+    }
+
+    public static double lordUInt32(int v1, int v2, int v3, int v4,
+                                    double c0, double c1) {
+
+        long result =
+                ((long)((v1 & 0xFFFF) >> 8) << 24) |
+                        ((long)((v2 & 0xFFFF) >> 8) << 16) |
+                        ((long)((v3 & 0xFFFF) >> 8) << 8)  |
+                        ((long)((v4 & 0xFFFF) >> 8));
+
+        long unsigned = result & 0xFFFFFFFFL;
+
+        return c0 + c1 * unsigned;
+    }
+
+    public static double lordFloat(int v1, int v2, int v3, int v4,
+                                   double c0, double c1) {
+
+        int bits =
+                (((v1 & 0xFFFF) >> 8) << 24) |
+                        (((v2 & 0xFFFF) >> 8) << 16) |
+                        (((v3 & 0xFFFF) >> 8) << 8)  |
+                        ((v4 & 0xFFFF) >> 8);
+
+        float value = Float.intBitsToFloat(bits);
+
+        return c0 + c1 * value;
+    }
+
+
+    public static double lordDouble(int v1, int v2, int v3, int v4,
+                                    int v5, int v6, int v7, int v8,
+                                    double c0, double c1) {
+
+        long bits =
+                ((long)((v1 & 0xFFFF) >> 8) << 56) |
+                        ((long)((v2 & 0xFFFF) >> 8) << 48) |
+                        ((long)((v3 & 0xFFFF) >> 8) << 40) |
+                        ((long)((v4 & 0xFFFF) >> 8) << 32) |
+                        ((long)((v5 & 0xFFFF) >> 8) << 24) |
+                        ((long)((v6 & 0xFFFF) >> 8) << 16) |
+                        ((long)((v7 & 0xFFFF) >> 8) << 8)  |
+                        ((long)((v8 & 0xFFFF) >> 8));
+
+        double value = Double.longBitsToDouble(bits);
+
+        return c0 + c1 * value;
+    }
+
     public static double bin(int valueHI, double[] coef) {
 
         try {
@@ -404,8 +480,6 @@ public class Conversion {
             return var0;
 
         }
-
-
 
     }
 
