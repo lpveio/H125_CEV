@@ -1,11 +1,10 @@
-package br.cta.ipev.superlynx.telas;
+package br.cta.ipev.seahawk.telas;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
@@ -14,10 +13,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import br.cta.ipev.superlynx.AppManager;
-import br.cta.ipev.superlynx.Index;
-import br.cta.ipev.superlynx.R;
-import br.cta.ipev.superlynx.databinding.ActivityComandoVooBinding;
+import br.cta.ipev.seahawk.AppManager;
+import br.cta.ipev.seahawk.Index;
+import br.cta.ipev.seahawk.databinding.ActivityComandoVooBinding;
 import br.cta.isad.Display;
 import br.cta.misc.Convertions;
 

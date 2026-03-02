@@ -1,4 +1,4 @@
-package br.cta.ipev.superlynx;
+package br.cta.ipev.seahawk;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;

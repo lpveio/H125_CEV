@@ -1,4 +1,4 @@
-package br.cta.ipev.superlynx;
+package br.cta.ipev.seahawk;
 
 import android.widget.TextView;
 

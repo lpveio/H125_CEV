@@ -1,26 +1,18 @@
-package br.cta.ipev.superlynx.telas;
+package br.cta.ipev.seahawk.telas;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.DashPathEffect;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import br.cta.ipev.superlynx.AppManager;
-import br.cta.ipev.superlynx.databinding.ActivityTelaTresBinding;
+import br.cta.ipev.seahawk.AppManager;
+import br.cta.ipev.seahawk.databinding.ActivityTelaTresBinding;
 import br.cta.isad.Display;
 
 public class TelaTres extends AppCompatActivity implements Display {

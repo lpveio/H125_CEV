@@ -1,4 +1,4 @@
-package br.cta.ipev.superlynx;
+package br.cta.ipev.seahawk;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,9 +9,8 @@ import java.util.List;
 import br.cta.ipev.commom.instruments.odometers.AlertRange;
 import br.cta.ipev.commom.screen.BaseSetup;
 import br.cta.ipev.commom.screen.Tab;
-import br.cta.ipev.superlynx.telas.Comando_Voo;
-import br.cta.ipev.superlynx.telas.TelaDois;
-import br.cta.ipev.superlynx.telas.TelaTres;
+import br.cta.ipev.seahawk.telas.Comando_Voo;
+import br.cta.ipev.seahawk.telas.TelaDois;
 
 public class Setup extends BaseSetup{
 

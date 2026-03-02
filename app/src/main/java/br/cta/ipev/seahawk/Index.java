@@ -1,4 +1,4 @@
-package br.cta.ipev.superlynx;
+package br.cta.ipev.seahawk;
 
 public enum Index {
     TEMPO,

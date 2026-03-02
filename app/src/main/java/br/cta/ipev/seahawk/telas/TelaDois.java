@@ -1,12 +1,10 @@
-package br.cta.ipev.superlynx.telas;
+package br.cta.ipev.seahawk.telas;
 
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,9 +19,8 @@ import java.util.Locale;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.cta.ipev.superlynx.AppManager;
-import br.cta.ipev.superlynx.R;
-import br.cta.ipev.superlynx.databinding.ActivityTelaDoisBinding;
+import br.cta.ipev.seahawk.AppManager;
+import br.cta.ipev.seahawk.databinding.ActivityTelaDoisBinding;
 import br.cta.isad.Display;
 
 public class TelaDois extends AppCompatActivity implements Display {

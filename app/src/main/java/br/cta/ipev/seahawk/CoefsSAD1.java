@@ -1,8 +1,4 @@
-package br.cta.ipev.superlynx;
-
-import android.util.Log;
-
-import java.util.Arrays;
+package br.cta.ipev.seahawk;
 
 import br.cta.isad.iCounts2UE;
 import br.cta.isad.EV;

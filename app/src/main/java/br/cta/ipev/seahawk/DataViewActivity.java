@@ -1,17 +1,13 @@
-package br.cta.ipev.superlynx;
+package br.cta.ipev.seahawk;
 
 import android.Manifest;
 import android.app.ActivityGroup;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.Toast;
-
-import androidx.core.app.ActivityCompat;
 
 import java.util.List;
 
@@ -34,7 +30,6 @@ public class DataViewActivity  extends ActivityGroup{
         if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
-
 
         setContentView(R.layout.activity_data_view);
 

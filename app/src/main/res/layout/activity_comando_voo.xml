@@ -47,12 +47,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0sp"
-            android:layout_weight="0.2"
-            android:orientation="horizontal"/>
-
         <br.cta.ipev.commom.instruments.DeflexionsHelicopterNoLimits
             android:id="@+id/chartDeltas"
             android:layout_width="match_parent"

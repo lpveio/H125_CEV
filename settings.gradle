@@ -16,5 +16,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "AH-11B Super Lynx"
+rootProject.name = "SeaHawk"
 include ':app'
