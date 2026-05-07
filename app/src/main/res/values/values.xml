@@ -6,6 +6,7 @@
     <color name="targetColor2">#4AFF00</color>
     <color name="valueBackgroundColor2">#ff8800</color>
     <color name="valueColor2">#000080</color>
+    <bool name="isTablet">false</bool>
 
     <style name="display_text" parent="@android:style/TextAppearance">
         <item name="android:gravity">center</item>

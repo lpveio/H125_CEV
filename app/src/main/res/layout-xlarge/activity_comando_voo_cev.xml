@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <br.cta.ipev.commom.instruments.DeflexionsHelicopter
+        android:id="@+id/chartDeltas"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="9"
+        custom:lineColor="@color/darkGreen"
+        custom:lineStrokeWidth="2"
+        custom:valueAlfa="70"
+        custom:valueColor="@android:color/holo_blue_dark"
+        custom:valueStrokeWidth="25"
+        custom:margin="35"
+        custom:valueTextSize="16dp"/>
+    <ToggleButton
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:textOff="@string/CongOff"
+        android:textOn="@string/CongOn"
+        android:id="@+id/btnFreeze"
+        android:onClick="onFreeze"
+        android:background="@drawable/tooglebutton_selector"/>
+</LinearLayout>
+
+
+
+

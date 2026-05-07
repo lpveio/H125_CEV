@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtFuelQty"
+                style="@style/PilotoNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/FQUANT" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtFuelQty1Valor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtFuelQtyAValor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtPesoTotal"
+                style="@style/PilotoNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="AUW(kg)" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtPesoTotalValor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDC"
+                style="@style/PilotoNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/XPC" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDCValor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDM"
+                style="@style/PilotoNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/XPA"/>
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDMValor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDL"
+                style="@style/PilotoNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/DDM"/>
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDLValor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDN"
+                style="@style/PilotoNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/DDL"/>
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtDDNValor"
+                style="@style/PilotoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+
+        </LinearLayout>
+        <FrameLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/chartCGLong"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/PilotoNome"
+                android:text="@string/CG_Longitudinal"/>
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/PilotoValor"
+                android:text="@string/valor"
+                android:id="@+id/txtCGLongValor"
+                custom:decimalPlaces="2"/>
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                style="@style/PilotoNome"
+                android:text="@string/CG_Lateral"
+                android:layout_weight="1"/>
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/PilotoValor"
+                android:text="@string/valor"
+                android:id="@+id/txtCGLatValor"
+                custom:decimalPlaces="2"/>
+
+            <!--<FrameLayout
+                android:id="@+id/chartCGLong"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="3" />-->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                style="@style/PilotoNome"
+                android:textSize="24sp"
+                android:text="Peso (lb)/CGLat (in)/CGLong (in)"
+                android:layout_weight="1"/>
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:id="@+id/txtInputPeso"
+                style="@style/PilotoValor"
+                custom:decimalPlaces="2"
+                android:text="@string/valor"/>
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/txtInputCGLong"
+                android:textAlignment="center"
+                style="@style/PilotoValor"
+                android:text="@string/valor"
+                custom:decimalPlaces="2"/>
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/txtInputCGLat"
+                android:textAlignment="center"
+                style="@style/PilotoValor"
+                android:text="@string/valor"
+                custom:decimalPlaces="2"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/configurar"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:id="@+id/btnConfig"
+                android:enabled="true"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
+
+
+
+

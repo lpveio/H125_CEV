@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical">
+        <br.cta.ipev.commom.instruments.odometers.SemiOdometer
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            custom:scales="@array/beta_scales"
+            custom:minorScales="@array/beta_scales_minor"
+            android:id="@+id/odoBeta"
+            custom:scaleTextSize="10sp"
+            custom:valueTextSize="22sp"
+            custom:showMinMax="false"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            style="@style/PilotoNome"
+            android:text="@string/DELTA_BETA"
+            android:id="@+id/txtBeta"/>
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            style="@style/PilotoNome"
+            android:text="@string/Vb"/>
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            style="@style/PilotoNome"
+            android:text="@string/ZPB"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            style="@style/PilotoValor"
+            android:text="@string/valor"
+            android:id="@+id/txtBetaValor"/>
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            style="@style/PilotoValor"
+            android:text="@string/valor"
+            android:id="@+id/txtVBValor"/>
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            style="@style/PilotoValor"
+            android:text="@string/valor"
+            android:id="@+id/txtZPBValor"/>
+    </LinearLayout>
+
+</LinearLayout>

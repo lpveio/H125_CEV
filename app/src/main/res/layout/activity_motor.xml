@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/TEMPO_UTC"
+                android:backgroundTint="@color/black"
+                style="@style/small_text" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/top"
+                android:backgroundTint="@color/black"
+                style="@style/small_text" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/mem"
+                android:backgroundTint="@color/black"
+                style="@style/small_text" />
+        </LinearLayout>
+
+        <!-- Linha 2: Valores principais -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/valor"
+                style="@style/small_time" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOPValue"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                style="@style/small_time" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtMEMValor"
+                style="@style/small_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:show="timeValue"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mem_status"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/mem_status_ocupado"
+                android:text="Espaço Ocupado : 0%"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/mem_status_full"
+                android:text="Mémoria Cheia: NÃO"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Gravando: NÃO"
+                android:id="@+id/mem_status_saving"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Erros : 0000 CF Card detected and initialization complete "
+                android:id="@+id/mem_status_error"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_marginTop="10sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtFuelQty"
+                style="@style/CalibAnemNomeMin"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/FQUANT" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFuelQtyKg"
+                style="@style/CalibAnemValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFuelQtyPorc"
+                style="@style/CalibAnemValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtOAT"
+                style="@style/CalibAnemNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/FF" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFFValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtRPM"
+                style="@style/CalibAnemNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/XPC" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtXPCValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtESTABPOS"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/OAT" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtOATValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtVG"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/Vb" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtVBValor"
+                style="@style/CalibAnemValor"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtH"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ZPB" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtZVBValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtH55"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/RA" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtRAValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtH5544"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/Vzb" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtHValor9"
+                style="@style/CalibAnemValor"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtRI"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/RI" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtFLI"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/FLI" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTGT"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/N1" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTOT"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/TOT" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTRQ"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/TRQ" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtN2"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/N2" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtNR"
+                style="@style/CalibAnemNome"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/NR" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtRIValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFLIValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1ValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOTValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN2ValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtNRValorMax"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtRIValor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFLIValor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1Valor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOTValor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQValor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN2Valor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtNRValor"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtRIValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFLIValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1ValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOTValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN2ValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtNRValorMin"
+                style="@style/CalibAnemMinMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6sp"
+                android:id="@+id/btnControlreset"
+                android:textOn="@string/reset"
+                android:textOff="@string/reset"
+                android:background="@drawable/tooglebutton_selector"
+                android:onClick="btnControlClick"/>
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6sp"
+                android:id="@+id/btnControlpause"
+                android:textOn="@string/pause"
+                android:textOff="@string/pause"
+                android:background="@drawable/tooglebutton_selector"
+                android:onClick="btnControlClick"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                style="@style/CalibAnemNomeMin"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/N1_" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_11"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_21"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_12"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_22"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_13"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_23"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_14"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_24"
+                style="@style/CalibAnemValorMin"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_15"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_25"
+                style="@style/CalibAnemValorMin"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_16"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtN1_26"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                style="@style/CalibAnemNomeMin"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/TOT_" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT11"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT21"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT12"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT22"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT13"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT23"
+                style="@style/CalibAnemValorMin"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT14"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT24"
+                style="@style/CalibAnemValorMin"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT15"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT25"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                android:layout_marginEnd="5dp"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT16"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOT26"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                style="@style/CalibAnemNomeMin"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/TRQ_" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ11"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ21"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ12"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ22"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ13"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ23"
+                style="@style/CalibAnemValorMin"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ14"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ24"
+                style="@style/CalibAnemValorMin"
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ15"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ25"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ16"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTRQ26"
+                style="@style/CalibAnemValorMin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                style="@style/CalibAnemMinMax"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text=""
+                custom:decimalPlaces="1"
+                custom:show="maxValue"
+                custom:enableAlert="false"/>
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/btnplay1"
+                android:textOn="@string/play"
+                android:textOff="@string/play"
+                android:onClick="btnControlClick"/>
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/btnplay2"
+                android:textOn="@string/play"
+                android:textOff="@string/play"
+                android:onClick="btnControlClick"/>
+
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/btnplay9"
+                android:textOn="@string/play"
+                android:textOff="@string/play"
+
+                android:onClick="btnControlClick"/>
+
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/btnplay23"
+                android:textOn="@string/play"
+                android:textOff="@string/play"
+                android:onClick="btnControlClick"/>
+
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/btnplay5"
+                android:textOn="@string/play"
+                android:textOff="@string/play"
+                android:onClick="btnControlClick"/>
+
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnplay6"
+                android:textOn="@string/play"
+                android:textOff="@string/play"
+                android:onClick="btnControlClick"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>

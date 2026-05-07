@@ -1,6 +1,28 @@
 <resources>
-    <string name="app_name">AH-11B Super Lynx</string>
-    <string name="tempo">TEMPO UTC</string>
+    <string name="app_name">H125 CEV</string>
+    <string name="tempo">UTC</string>
     <string name="top">TOP</string>
+    <string name="mem">MEM</string>
     <string name="valor">VALOR</string>
+    <string name="act_name">Autorrotação - Configurações</string>
+    <string name="confTol">Config. Tolerâncias</string>
+    <string name="plotTol">Plotar Tol.</string>
+    <string name="play">PLAY</string>
+    <string name="pause">PAUSAR</string>
+    <string name="reset">CLEAR</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
+    <string name="configurar">ALTERAR</string>
+    <string name="OffsetOn">OFFSET Ligado</string>
+    <string name="OffsetOff">OFFSET Desligado</string>
+    <string name="Esc_Bx_Veloc">Escala Veloc. Baixa</string>
+    <string name="BaixaVelOn">Escala Baixa Vel. (ON)</string>
+    <string name="BaixaVelOff">Escala Baixa Vel. (OFF)</string>
+    <string name="CongOff">Congelamento (OFF)</string>
+    <string name="CongOn">Congelamento (ON)</string>
+    <string name="BoomON">Boom (On)</string>
+    <string name="BoomOFF">Boom (Off)</string>
+    <string name="Boom">BOOM</string>
+    <string name="endereco_servidor_embarcado">192.168.0.200</string>
+    <integer name="porta_comando">50100</integer>
 </resources>

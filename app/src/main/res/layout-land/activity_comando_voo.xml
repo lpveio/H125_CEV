@@ -57,7 +57,7 @@
 
 
 
-            <br.cta.ipev.commom.instruments.DeflexionsHelicopterNoLimits
+            <br.cta.ipev.commom.instruments.DeflexionsHelicopter
                 android:id="@+id/chartDeltas"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

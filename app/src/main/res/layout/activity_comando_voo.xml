@@ -47,7 +47,7 @@
 
         </LinearLayout>
 
-        <br.cta.ipev.commom.instruments.DeflexionsHelicopterNoLimits
+        <br.cta.ipev.commom.instruments.DeflexionsHelicopter
             android:id="@+id/chartDeltas"
             android:layout_width="match_parent"
             android:layout_height="0dp"

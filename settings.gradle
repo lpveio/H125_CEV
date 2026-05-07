@@ -16,5 +16,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "SeaHawk"
+rootProject.name = "H125 CEV-AR"
 include ':app'

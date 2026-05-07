@@ -6,8 +6,8 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "br.cta.ipev.seahawk"
-        minSdk 26
+        applicationId "br.cta.ipev.h125"
+        minSdk 25
         targetSdk 33
         versionCode 2
         versionName "2.4"
@@ -29,22 +29,26 @@ android {
     viewBinding{
         enabled = true
     }
-    namespace 'br.cta.ipev.seahawk'
+    namespace 'br.cta.ipev.h125'
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation (name:"isad-release",ext:"aar")
+    implementation (name:"isad-debug",ext:"aar")
     implementation (name: 'commom-debug',ext:'aar')
     implementation (name: 'misc-release',ext: 'aar')
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation (name: 'charting-release',ext:'aar')
+    implementation (name: 'core-release',ext:'aar')
+    implementation (name: 'drawing-release',ext:'aar')
+    implementation (name: 'data-release',ext:'aar')
+    implementation (name: 'extensions-release',ext:'aar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.github.anastr:speedviewlib:1.6.1'
     implementation 'org.apache.commons:commons-math3:3.6.1'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 }

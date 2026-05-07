@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".AppManager"
         android:allowBackup="true"
@@ -16,18 +18,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TerereAuto">
         <activity
+            android:name=".replay.ReplayActivity"
+            android:exported="false" />
+        <activity
             android:name=".DataViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".telas.Comando_Voo"
-        android:configChanges="orientation|screenSize"/>
-        <activity android:name=".telas.TelaDois"
-            android:configChanges="orientation|screenSize"/>
-
+        <activity
+            android:name=".telas.Comando_Voo"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".telas.Ralt"
+            android:configChanges="orientation|screenLayout" />
+        <activity
+            android:name=".telas.Comando_Voo_2"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".telas.Motores"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".telas.QDV"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".telas.CalibAnemo"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".telas.SChart"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".telas.DutchRoll"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

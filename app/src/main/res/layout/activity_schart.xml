@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/navy"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTempo"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/TEMPO_UTC" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTempoValor"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="VALOR"
+                custom:show="timeValue"/>
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTOP"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="TOP" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTOPValor"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="VALOR" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
+                <br.cta.ipev.commom.instruments.NumericDisplay
+                    android:id="@+id/txtA"
+                    style="@style/NomeParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor" />
+
+                <br.cta.ipev.commom.instruments.NumericDisplay
+                    android:id="@+id/txtAValor"
+                    style="@style/ValorParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="VALOR4"
+                    custom:decimalPlaces="0" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chartA"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1">
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDC_A"
+                android:textOff="@string/XPC"
+                android:textOn="@string/XPC"
+                android:onClick="btnChartA"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDM_A"
+                android:textOff="@string/DDM"
+                android:textOn="@string/DDM"
+                android:onClick="btnChartA"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDL_A"
+                android:textOff="@string/DDL"
+                android:textOn="@string/DDL"
+                android:onClick="btnChartA"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDN_A"
+                android:textOff="@string/XPA"
+                android:textOn="@string/XPA"
+                android:onClick="btnChartA"
+                android:background="@drawable/tooglebutton_selector"/>
+
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDin_A"
+                android:textOff="@string/Dinamica"
+                android:textOn="@string/Dinamica"
+                android:onClick="btnDinamica"
+                android:background="@drawable/tooglebutton_selector"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
+                <br.cta.ipev.commom.instruments.NumericDisplay
+                    android:id="@+id/txtB"
+                    style="@style/NomeParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor" />
+
+                <br.cta.ipev.commom.instruments.NumericDisplay
+                    android:id="@+id/txtBValor"
+                    style="@style/ValorParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="VALOR"
+                    custom:decimalPlaces="0" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chartB"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1">
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDC_B"
+                android:textOff="@string/XPC"
+                android:textOn="@string/XPC"
+                android:onClick="btnChartB"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDM_B"
+                android:textOff="@string/DDM"
+                android:textOn="@string/DDM"
+                android:onClick="btnChartB"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDL_B"
+                android:textOff="@string/DDL"
+                android:textOn="@string/DDL"
+                android:onClick="btnChartB"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDN_B"
+                android:textOff="@string/XPA"
+                android:textOn="@string/XPA"
+                android:onClick="btnChartB"
+                android:background="@drawable/tooglebutton_selector"/>
+
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDin_B"
+                android:textOff="@string/Dinamica"
+                android:textOn="@string/Dinamica"
+                android:onClick="btnDinamica"
+                android:background="@drawable/tooglebutton_selector"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
+                <br.cta.ipev.commom.instruments.NumericDisplay
+                    android:id="@+id/txtC"
+                    style="@style/NomeParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor" />
+
+                <br.cta.ipev.commom.instruments.NumericDisplay
+                    android:id="@+id/txtCValor"
+                    style="@style/ValorParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="VALOR"
+                    custom:decimalPlaces="0" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chartC"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1">
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDC_C"
+                android:textOff="@string/XPC"
+                android:textOn="@string/XPC"
+                android:onClick="btnChartC"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDM_C"
+                android:textOff="@string/DDM"
+                android:textOn="@string/DDM"
+                android:onClick="btnChartC"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDL_C"
+                android:textOff="@string/DDL"
+                android:textOn="@string/DDL"
+                android:onClick="btnChartC"
+                android:background="@drawable/tooglebutton_selector"/>
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDDN_C"
+                android:textOff="@string/XPA"
+                android:textOn="@string/XPA"
+                android:onClick="btnChartC"
+                android:background="@drawable/tooglebutton_selector"/>
+
+            <ToggleButton
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnDin_C"
+                android:textOff="@string/Dinamica"
+                android:textOn="@string/Dinamica"
+                android:onClick="btnDinamica"
+                android:background="@drawable/tooglebutton_selector"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnPause"
+                android:text="@string/pause"
+                android:layout_gravity="center_vertical"/>
+            <Button
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btnReset"
+                android:text="@string/reset"
+                android:layout_gravity="center_vertical"/>
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5sp"
+                android:layout_weight="1"
+                android:id="@+id/btnOffset"
+                android:textOn="@string/OffsetOn"
+                android:textOff="@string/OffsetOff"
+                android:background="@drawable/tooglebutton_selector"
+                android:onClick="onOffset"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
