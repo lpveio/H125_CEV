@@ -164,7 +164,6 @@ public abstract class iStripChart {
 
         if(yHigh>0)
             plotLimitHigh(ref, yHigh);
-
         else {
             highLimit.hide();
         }
@@ -177,16 +176,45 @@ public abstract class iStripChart {
     }
 
 
+    public void plotLimit2(Double ref, Double yHigh, Double yLow){
+
+        if(yHigh>0)
+            plotLimitHigh2(ref, yHigh);
+        else {
+            highLimit.hide();
+        }
+        if(yLow >0)
+            plotLimitLow2(ref, yLow);
+        else{
+            lowLimit.hide();
+        }
+
+    }
+
     public void plotLimitHigh(Double ref, Double yHigh){
-        highLimit.setY1(ref + yHigh);
+        highLimit.setY1(ref + yHigh );
         highLimit.show();
-        this.yAxisRange.setMax(ref+yHigh);
+        this.yAxisRange.setMax((ref+yHigh) * 1.01);
     }
 
     public void plotLimitLow(Double ref, Double yLow){
         lowLimit.setY1(ref-yLow);
         lowLimit.show();
-        this.yAxisRange.setMin(ref-yLow);
+        this.yAxisRange.setMin((ref-yLow) * 0.99);
+
+
+    }
+
+    public void plotLimitHigh2(Double ref, Double yHigh){
+        highLimit.setY1(ref + yHigh );
+        highLimit.show();
+        this.yAxisRange.setMax((ref+yHigh) * 1.03);
+    }
+
+    public void plotLimitLow2(Double ref, Double yLow){
+        lowLimit.setY1(ref-yLow);
+        lowLimit.show();
+        this.yAxisRange.setMin((ref-yLow) * 0.97);
 
 
     }

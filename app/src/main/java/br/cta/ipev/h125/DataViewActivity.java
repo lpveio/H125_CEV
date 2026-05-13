@@ -58,7 +58,13 @@ public class DataViewActivity  extends ActivityGroup{
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         missionManager = (AppManager) getApplicationContext();
         fileManager = new ReplayFileManager(this);
-        createDialog();
+
+        //Aplicacao sem option , desmarcar os seguintes itens:
+        createMission(AppIndex);
+        createTabs();
+
+        //Aplicacao com option
+        //createDialog();
 
     }
 

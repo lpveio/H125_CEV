@@ -27,13 +27,13 @@ public class AppManager extends Application {
         this.udpConnector.addReceived(this.receiver);
 
         //Setar true caso queria gravar o voo
-        this.receiver.setSaveFlight(true);
+        this.receiver.setSaveFlight(false);
         //Setar quais parametros vai querer gravar e cabecalho
         this.receiver.setLogFormatter(new FlightLoggerFormatter());
         //Setar a frequencia de aquisicao do acra
         this.receiver.setFreqInput(32);
         //Setar a frequencia de gravacao do tablet
-        this.receiver.setFreqSave(8);
+        this.receiver.setFreqSave(32);
         //Setar o tempo de inatividade para interromper a gravacao do arquivo
         this.receiver.setTimeEndFlight(60000);
 

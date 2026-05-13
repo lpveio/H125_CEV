@@ -20,10 +20,10 @@ public class Setup extends BaseSetup{
     public List<Tab> getScreenTabs(boolean forTablets) {
         List<Tab>screenTabs = new ArrayList<Tab>();
         screenTabs.add(0,new Tab("RA","RALT", Ralt.class,false,true));
-        //screenTabs.add(1,new Tab("QDV","PRINCIPAL", QDV.class,true,false));
+        screenTabs.add(1,new Tab("QDV","PRINCIPAL", QDV.class,true,false));
        // screenTabs.add(1,new Tab("S-CHART","S-CHART", SChart.class,true,false));
-       // screenTabs.add(2,new Tab("Cal. Anem.","ANEMO", CalibAnemo.class,true,false));
-        screenTabs.add(0,new Tab("Motores","MOTORES", ReplayActivity.class,true,false));
+        screenTabs.add(2,new Tab("Cal. Anem.","ANEMO", CalibAnemo.class,true,false));
+       // screenTabs.add(0,new Tab("Motores","MOTORES", ReplayActivity.class,true,false));
        // screenTabs.add(4,new Tab("C.VOO-PP","C.VOO-PP", Comando_Voo.class,true,true));
        // screenTabs.add(5,new Tab("C.VOO(2)-PP","C.VOO(2)-PP", Comando_Voo_2.class,true,true));
         //screenTabs.add(6,new Tab("DutchRoll","DUTCH ROLL", DutchRoll.class,true,false));

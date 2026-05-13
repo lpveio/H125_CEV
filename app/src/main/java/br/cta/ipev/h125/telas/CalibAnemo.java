@@ -242,7 +242,7 @@ public class CalibAnemo extends AppCompatActivity implements Display , ReplayDis
 
             tolMin = binding.txtVBTolMin.getText().length()==0?0:Double.parseDouble(binding.txtVBTolMin.getText().toString());
             tolMax = binding.txtVBTolMax.getText().length()==0?0:Double.parseDouble(binding.txtVBTolMax.getText().toString());
-            chartVB.plotLimit(vb,tolMax,tolMin);
+            chartVB.plotLimit2(vb,tolMax,tolMin);
 
             tolMin = binding.txtZPBTolMin.getText().length()==0?0:Double.parseDouble(binding.txtZPBTolMin.getText().toString());
             tolMax = binding.txtZPBTolMax.getText().length()==0?0:Double.parseDouble(binding.txtZPBTolMax.getText().toString());
