@@ -9,6 +9,7 @@ import org.apache.commons.math3.fitting.WeightedObservedPoints;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Locale;
 
 public class Conversion {
 
@@ -17,6 +18,12 @@ public class Conversion {
     private int bitSinal = 1;
 
     public static int ARINC429DataFieldSize = 21;
+
+    private static final double KB = 1024.0;
+
+    private static final double MB = 1024.0 * 1024.0;
+
+    private static final double GB = 1024.0 * 1024.0 * 1024.0;
 
     private int[] pacoteUdp;
 
@@ -101,6 +108,8 @@ public class Conversion {
         }
         return sb.toString();
     }
+
+
 
     public static double iprena_float(int word1, int word2, int word3, int word4, double resolution) {
 
@@ -623,14 +632,92 @@ public class Conversion {
         return msb == 0 ? value : (int)(-1L * (((long)(~value) & valueMask) + 1L));
     }
 
-    public char[] formatInt(byte[] packet){
+    public char[] formatInt(byte[] packet) {
         int times = Short.SIZE / Byte.SIZE;
         char[] result = new char[packet.length / times];
 
-        for (int i=0; i < result.length; i++){
-            result[i] = ByteBuffer.wrap(packet,i * times,times).order(ByteOrder.BIG_ENDIAN).getChar();
+        for (int i = 0; i < result.length; i++) {
+            result[i] = ByteBuffer.wrap(packet, i * times, times).order(ByteOrder.BIG_ENDIAN).getChar();
         }
         return result;
+    }
+    /**
+     * Bytes-> KB
+     */
+    public static double bytesToKb(long bytes) {
+        return bytes / KB;
+    }
+    /**
+     * Bytes -> MB
+     */
+    public static double bytesToMb(long bytes) {
+        return bytes / MB;
+
+    }
+    /**
+     * Bytes -> GB
+     */
+    public static double bytesToGb(long bytes) {
+        return bytes / GB;
+
+    }
+    /**
+     * KB -> MB
+     */
+    public static double kbToMb(long kb) {
+        return kb / KB;
+
+    }
+    /**
+     * KB -> GB
+     */
+
+    public static double kbToGb(long kb) {
+        return kb / (1024.0 * 1024.0);
+
+    }
+    /**
+     * MB -> GB
+     */
+    public static double mbToGb(long mb) {
+        return mb / 1024.0;
+    }
+
+    public static String formatBytes(long bytes) {
+
+        if (bytes >= GB) {
+            return String.format(Locale.US, "%.2f GB", bytesToGb(bytes));
+
+        } else if (bytes >= MB) {
+
+            return String.format(Locale.US, "%.2f MB", bytesToMb(bytes));
+
+        } else if (bytes >= KB) {
+
+            return String.format(Locale.US, "%.2f KB", bytesToKb(bytes));
+
+        } else {
+            return bytes + " Bytes";
+        }
+    }
+
+    /**
+     * Formata KB automaticamente
+     */
+
+    public static String formatKb(long kb) {
+
+        if (kb >= (1024 * 1024)) {
+            return String.format(Locale.US, "%.2f GB", kbToGb(kb));
+
+        } else if (kb >= 1024) {
+            return String.format(Locale.US, "%.2f MB", kbToMb(kb));
+
+        } else {
+            return kb + " KB";
+
+        }
+
     }
 
 }

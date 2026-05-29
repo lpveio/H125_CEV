@@ -14,7 +14,9 @@
     <string name="RPMR">RPM\u1d63(%)</string>
     <string name="ESTAB_POS">ESTAB POS (°)</string>
     <string name="Vb">Vb (kt)</string>
+    <string name="Vi">Vi (kt)</string>
     <string name="Vzb">Vzb (ft/min)</string>
+    <string name="Vzi">Vzi (ft/min)</string>
     <string name="RA">RA (ft)</string>
     <string name="NR">NR(%)</string>
     <string name="ZPB">Zpb (ft)</string>
@@ -28,6 +30,8 @@
     <string name="NG1">NG\u2081(%)</string>
     <string name="N1_min">N\u2081(%)</string>
     <string name="N1">N1(%)</string>
+    <string name="N2_rpm">N2(rmp)</string>
+    <string name="NR_rpm">NR(rmp)</string>
     <string name="N1_">N1\n(%)</string>
     <string name="N2_min">N\u2082(%)</string>
     <string name="N2">N2(%)</string>
@@ -71,6 +75,14 @@
     <string name="CG_Longitudinal">CG Lng (in)</string>
     <string name="Peso">Peso</string>
     <string name="CG">CG</string>
+    <string name="Status">Status</string>
+    <string name="Lat">Lat</string>
+    <string name="Long">Long</string>
+    <string name="Alt">Alt (m)</string>
+    <string name="PDOP">PDOP</string>
+    <string name="HDOP">HDOP</string>
+    <string name="FixQuality">Fix Quality</string>
+    <string name="Sats">Sats em Uso </string>
 
     <string-array name="packet_order">
         <item>TEMPO</item>

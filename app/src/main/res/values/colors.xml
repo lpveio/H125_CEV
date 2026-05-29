@@ -27,4 +27,22 @@
     <color name="normalColor">#ff8800</color>
     <color name="pointerColor">#000080</color>
     <color name="limitPointerColor">#000080</color>
+    <color name="colorHHRed">#7f060036</color>
+    <color name="colorPrimary">#7f060037</color>
+    <color name="colorPrimaryDark">#7f060038</color>
+    <color name="colorTitleIcon">#7f060039</color>
+    <color name="colorTitleIconAccent">#7f06003a</color>
+    <color name="hhDarkBlue">#7f060074</color>
+    <color name="hhGreen">#7F2FBF2F</color>
+    <color name="hhLightBlue">#039BE5</color>
+    <color name="hhOrange">#F4511E</color>
+    <color name="hhYellow">#FDD835</color>
+    <color name="hhRed">#901422</color>
+    <color name="hhBlue">#7f06007a</color>
+    <color name="hhPurple">#7f06007b</color>
+    <color name="hhPink">#7f06007c</color>
+    <color name="colorFabGuardColor">#7f06007d</color>
+    <color name="hhBrown">#7f06007e</color>
+    <color name="hhGrey">#7f06007f</color>
+    <color name="colorAccent">#7f0400f7</color>
 </resources>

@@ -12,7 +12,7 @@ public class FlightLoggerFormatter implements LogFormatter {
 
     @Override
     public String header() {
-        return "time, top, mem, xpa, xpc,  lat, lon, alt_msl, gs_kn, hdg, fli, auw, ff, nr,n1, fqty, tot, oil, n2, zpb, zpbmax, zpbmin, alt_rate , vb, vbmin, vbmax, hdg_014, imp_press, p, q, r,vert_vel, nx, ny, nz, theta,phi, sat,stt_press,total_press, tas, hdg_mag, hgd_true, ralt";
+        return "time, top, mem, xpa, xpc, lat, lon, alt_msl, gs_kn, hdg, fli, auw, ff, nr,n1, fqty, fqtyp, tot, oil, trq, n2, zpi, vzi , vi, hdg_014, imp_press, p, q, r,vert_vel, nx, ny, nz, theta,phi, sat,stt_press,total_press, tas, hdg_mag, hgd_true, ralt";
     }
 
     @Override
@@ -35,17 +35,13 @@ public class FlightLoggerFormatter implements LogFormatter {
         double n1 = cvt[Index.N1.ordinal()];
         double fqty = cvt[Index.FQTY.ordinal()];
         double fqtyp = cvt[Index.FQTYP.ordinal()];
-        double tot = cvt[Index.TOP.ordinal()];
+        double tot = cvt[Index.TOT.ordinal()];
         double oil = cvt[Index.OIL_PRESS.ordinal()];
-        double tq = cvt[Index.TQ.ordinal()];
+        double tq = cvt[Index.TRQ.ordinal()];
         double n2 = cvt[Index.N2.ordinal()];
-        double zpb = cvt[Index.ZPB.ordinal()];
-        double zpbmin = cvt[Index.ZPBMax.ordinal()];
-        double zpbmax = cvt[Index.ZPBMin.ordinal()];
-        double alt_rate = cvt[Index.ALT_RATE.ordinal()];
-        double vb = cvt[Index.VB.ordinal()];
-        double vbmin = cvt[Index.VBMin.ordinal()];
-        double vbmax = cvt[Index.VBMax.ordinal()];
+        double zpi = cvt[Index.ZPI.ordinal()];
+        double vzi = cvt[Index.VZI.ordinal()];
+        double vi = cvt[Index.VI.ordinal()];
         double hdg_014 = cvt[Index.HDG_014.ordinal()];
         double imp_press = cvt[Index.IMP_PRESS.ordinal()];
         double p = cvt[Index.P.ordinal()];
@@ -66,8 +62,11 @@ public class FlightLoggerFormatter implements LogFormatter {
         double ralt = cvt[Index.RALT.ordinal()];
         
         return String.format(Locale.US,
-                "%.3f,%.0f,%.0f,%.1f,%.1f,%.6f,%.6f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f, %.2f, %.2f", time, top, mem, xpa, xpc,  lat, lon, alt_msl, gs_kn, hdg, fli, auw, ff, nr,n1, fqty, fqtyp,  tot, oil,tq, n2, zpb, zpbmax, zpbmin, alt_rate,
-                vb, vbmin, vbmax, hdg_014, imp_press, p, q, r,vert_vel, nx, ny, nz, theta,phi, sat,stt_press,total_press, tas, hdg_mag, hgd_true, ralt);
+                "%.6f,%.0f,%.0f,%.1f,%.1f,%.6f,%.6f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f",
+                time, top, mem, xpa, xpc,  lat, lon, alt_msl, gs_kn, hdg,
+                fli, auw, ff, nr,n1, fqty, fqtyp,  tot, oil, tq,
+                n2, zpi, vzi, vi, hdg_014, imp_press, p, q, r,vert_vel,
+                nx, ny, nz, theta,phi, sat,stt_press,total_press, tas, hdg_mag, hgd_true, ralt);
         }
 
 

@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="STATUS GRAVAÇÃO"
+            android:backgroundTint="@color/black"
+            style="@style/small_text" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp">
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Gravando" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtGRAVANDOValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Estado Arquivo"/>
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtSTATUSValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Nome Arquivo" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtNameFIleValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Local de Armazenamento" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtFileLocalValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Tamanho Arquivo" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtFILESizeValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Espaço Livre" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtFreeSizeValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Mémoria Total" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            style="@style/QDVValor"
+            android:id="@+id/txtTotalSizeValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Mémoria Usada" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            style="@style/QDVValor"
+            android:id="@+id/txtUsedSizeValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            custom:decimalPlaces="0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="POSICIONAMENTO DGPS"
+            android:backgroundTint="@color/black"
+            style="@style/small_text" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1">
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/Status" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtStatusGPS"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:id="@+id/txtOAT"
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/Sats" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtSAtsValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:id="@+id/txtRPM333"
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/Lat" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtLatValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/Long" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtLongValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="1" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/PDOP" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtPDopValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="1" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:id="@+id/txtRPM"
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/HDOP" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtHdopValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/Alt" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtAltValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            custom:decimalPlaces="1" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_weight="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <br.cta.ipev.h125.gpsstatus.SkyPlotView
+                android:id="@id/skyPlot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="LOG FILESTATUS"
+                android:backgroundTint="@color/darkGreen"
+                android:layout_gravity="center_vertical">
+
+            </EditText>
+
+            <Button
+                android:id="@+id/btnSendCommand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/red"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:onClick="btnSendClick"
+                android:text="enviar" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Log NMEA:"
+                    android:textStyle="bold"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:id="@+id/text_nmea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Log NMEA:"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/darkGreen"
+                    android:onClick="btnConnectClick"
+                    android:text="CONECTAR" />
+
+
+                <ToggleButton
+                    android:id="@+id/btnGPS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:onClick="btnControlClick"
+                    android:textOff="@string/start"
+                    android:textOn="@string/stop" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

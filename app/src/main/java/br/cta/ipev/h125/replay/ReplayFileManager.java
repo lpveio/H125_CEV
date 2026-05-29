@@ -19,6 +19,7 @@ public class ReplayFileManager {
     /**
      * Retorna todos os logs disponíveis
      */
+
     public List<File> getFlightLogs() {
 
         List<File> result = new ArrayList<>();

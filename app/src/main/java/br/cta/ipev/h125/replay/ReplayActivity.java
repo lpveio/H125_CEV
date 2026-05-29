@@ -190,22 +190,18 @@ public class ReplayActivity extends AppCompatActivity {
 
     private void loadReplay() {
 
-        int index =
-                spinnerFiles.getSelectedItemPosition();
+        int index = spinnerFiles.getSelectedItemPosition();
 
         if (index < 0
                 || index >= logFiles.size()) {
             return;
         }
 
-        File selected =
-                logFiles.get(index);
+        File selected = logFiles.get(index);
 
-        List<ReplayFrame> frames =
-                logReader.read(selected);
+        List<ReplayFrame> frames = logReader.read(selected);
 
-        replayEngine =
-                new ReplayEngine(frames);
+        replayEngine = new ReplayEngine(frames);
 
         // =============================================
         // DISPLAY REPLAY

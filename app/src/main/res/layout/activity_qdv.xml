@@ -31,6 +31,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:text="@string/dgps"
+            android:backgroundTint="@color/black"
+            style="@style/small_text" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/mem"
             android:backgroundTint="@color/black"
             style="@style/small_text" />
@@ -55,6 +63,14 @@
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtTOPValue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/valor"
+            style="@style/small_time" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtDGPSValue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -167,7 +183,7 @@
             style="@style/QDVNome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2.5"
             android:text="@string/FF" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
@@ -175,7 +191,7 @@
             style="@style/QDVValor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/valor"
             custom:decimalPlaces="1" />
     </LinearLayout>
@@ -185,30 +201,14 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <br.cta.ipev.commom.instruments.NumericDisplay
-            android:id="@+id/txtRPM"
-            style="@style/QDVNome"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:text="@string/FLI" />
 
-
-        <br.cta.ipev.commom.compat.instruments.SingleDisplay
-            android:id="@+id/txtFLIValor"
-            style="@style/QDVValor"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="@string/valor"
-            custom:decimalPlaces="0" />
 
         <br.cta.ipev.commom.instruments.NumericDisplay
             android:id="@+id/txtRPM333"
             style="@style/QDVNome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="3"
             android:text="@string/NR2" />
 
 
@@ -223,6 +223,70 @@
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtN2Valor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/valor"
+            custom:decimalPlaces="0" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:text="@string/FLI" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtFLIValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/valor"
+            custom:decimalPlaces="1" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="P Óleo" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtPOleoValor"
+            style="@style/QDVValor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="@string/valor"
+            custom:decimalPlaces="1" />
+
+        <br.cta.ipev.commom.instruments.NumericDisplay
+            android:id="@+id/txtRPM"
+            style="@style/QDVNome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:text="AUW (kg)" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:id="@+id/txtAUWValor"
             style="@style/QDVValor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -270,7 +334,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/valor"
-            custom:decimalPlaces="0" />
+            custom:decimalPlaces="1" />
 
     </LinearLayout>
 
@@ -285,7 +349,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/Vb" />
+            android:text="@string/Vi" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtVBValor"
@@ -301,7 +365,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/ZPB" />
+            android:text="@string/ZP" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtZPBValor"
@@ -376,7 +440,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/valor"
-            custom:decimalPlaces="0" />
+            custom:decimalPlaces="1" />
 
         <br.cta.ipev.commom.instruments.NumericDisplay
             android:id="@+id/txtZp33"
@@ -393,7 +457,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/valor"
-            custom:decimalPlaces="0" />
+            custom:decimalPlaces="1" />
 
         <br.cta.ipev.commom.instruments.NumericDisplay
             android:id="@+id/txtH33"
@@ -410,7 +474,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/valor"
-            custom:decimalPlaces="0" />
+            custom:decimalPlaces="1" />
     </LinearLayout>
 
 
@@ -482,7 +546,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/valor"
+            android:text="SEM DADOS"
             custom:decimalPlaces="1" />
 
         <br.cta.ipev.commom.instruments.NumericDisplay
@@ -499,7 +563,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/valor"
+            android:text="SEM DADOS"
             custom:decimalPlaces="1" />
     </LinearLayout>
 

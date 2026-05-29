@@ -1,6 +1,7 @@
 package br.cta.ipev.h125.telas;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
 import br.cta.ipev.h125.AppManager;
+import br.cta.ipev.h125.classes.LogFileStatus;
 import br.cta.ipev.h125.setup.Index;
 import br.cta.ipev.h125.R;
 import br.cta.ipev.h125.databinding.ActivityQdvBinding;
@@ -19,6 +21,7 @@ public class QDV extends AppCompatActivity implements Display {
 
     private ActivityQdvBinding binding;
     AppManager manager;
+    LogFileStatus status = LogFileStatus.getInstance();
 
 
     @Override
@@ -38,6 +41,18 @@ public class QDV extends AppCompatActivity implements Display {
 
                     binding.txtTempoValor.setText(Convertions.sec2dhms(CVT[Index.TEMPO.ordinal()]));
                     binding.txtFuelQtyKg.setValue(CVT[Index.FQTY.ordinal()]);
+
+                    //Log.d("", "status:" + status.isRecording());
+
+                    if (status.isRecording()) {
+                        binding.txtDGPSValue.setText("GRAVANDO");
+                        binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.black));
+                        binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.white));
+                    } else {
+                        binding.txtDGPSValue.setText("OFF");
+                        binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.white));
+                        binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.red));
+                    }
                     double valor = CVT[Index.FQTYP.ordinal()];
                     String texto = String.format(Locale.getDefault(), "%.2f%%", valor);
                     binding.txtFuelQtyPorc.setStringValue(texto);
@@ -48,22 +63,20 @@ public class QDV extends AppCompatActivity implements Display {
                     binding.txtN2Valor.setValue(CVT[Index.N2.ordinal()]);
                     binding.txtNRValor.setValue(CVT[Index.NR.ordinal()]);
                     binding.txtN1Valor.setValue(CVT[Index.N1.ordinal()]);
-                    binding.txtTRQValor.setValue(CVT[Index.TQ.ordinal()]);
+                    binding.txtTRQValor.setValue(CVT[Index.TRQ.ordinal()]);
                     binding.txtTOTValor.setValue(CVT[Index.TOT.ordinal()]);
                     binding.txtFFValor.setValue(CVT[Index.FF.ordinal()]);
                     binding.txtRAValor.setValue(CVT[Index.RALT.ordinal()]);
                     binding.txtTASValor.setValue(CVT[Index.TAS.ordinal()]);
                     binding.txtGSValor.setValue(CVT[Index.GS_KN.ordinal()]);
                     binding.txtOATValor.setValue(CVT[Index.SAT.ordinal()]);
-                    binding.txtZPBValor.setValue(CVT[Index.ZPB.ordinal()]);
-                    binding.txtVBValor.setValue(CVT[Index.VB.ordinal()]);
+                    binding.txtZPBValor.setValue(CVT[Index.ZPI.ordinal()]);
+                    binding.txtVBValor.setValue(CVT[Index.VI.ordinal()]);
                     binding.txtHDGMAGValor.setValue(CVT[Index.HDG_MAG.ordinal()]);
                     binding.txtPHIValor.setValue(CVT[Index.PHI.ordinal()]);
                     binding.txtTETAValor.setValue(CVT[Index.THETA.ordinal()]);
-
-
-
-
+                    binding.txtAUWValor.setValue(CVT[Index.AUW.ordinal()]);
+                    binding.txtPOleoValor.setValue(CVT[Index.OIL_PRESS.ordinal()]);
 
                     setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
 
@@ -162,8 +175,12 @@ public class QDV extends AppCompatActivity implements Display {
     private void init() {
         manager = ((AppManager) getApplicationContext());
         manager.addDisplay(this);
-
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        manager.removeDisplay(this);
+    }
 }

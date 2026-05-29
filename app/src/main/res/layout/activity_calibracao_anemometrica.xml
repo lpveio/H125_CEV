@@ -138,8 +138,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0sp"
-
-            android:layout_weight="2"
+            android:layout_weight="1.6"
             android:orientation="horizontal">
 
             <br.cta.ipev.commom.instruments.NumericDisplay
@@ -147,7 +146,7 @@
                 style="@style/CalibAnemNome"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:text="@string/FQUANT" />
 
             <br.cta.ipev.commom.compat.instruments.SingleDisplay
@@ -173,7 +172,7 @@
                 style="@style/CalibAnemNome"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:text="@string/FF" />
 
             <br.cta.ipev.commom.compat.instruments.SingleDisplay
@@ -189,25 +188,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0sp"
-            android:layout_weight="2"
+            android:layout_weight="1.6"
             android:orientation="horizontal">
 
-            <br.cta.ipev.commom.instruments.NumericDisplay
-                android:id="@+id/txtRPM"
-                style="@style/CalibAnemNome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="@string/FLI" />
 
-            <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                android:id="@+id/txtFLIValor"
-                style="@style/CalibAnemValor"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="@string/valor"
-                custom:decimalPlaces="1" />
 
             <br.cta.ipev.commom.instruments.NumericDisplay
                 android:id="@+id/txtESTABPOS"
@@ -222,7 +206,7 @@
                 style="@style/CalibAnemValor"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:text="@string/valor"
                 custom:decimalPlaces="0" />
 
@@ -231,7 +215,49 @@
                 style="@style/CalibAnemValor"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/valor"
+                custom:decimalPlaces="0" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtRPM"
+                style="@style/CalibAnemNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:text="@string/FLI" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtFLIValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/valor"
+                custom:decimalPlaces="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1.6"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtZP"
+                style="@style/CalibAnemNome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/ZP" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtZPValor"
+                style="@style/CalibAnemValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
                 android:text="@string/valor"
                 custom:decimalPlaces="0" />
 
@@ -248,9 +274,9 @@
                 style="@style/CalibAnemValor"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:text="@string/valor"
-                custom:decimalPlaces="0" />
+                custom:decimalPlaces="1" />
 
         </LinearLayout>
 
@@ -258,7 +284,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0sp"
-            android:layout_weight="2"
+            android:layout_weight="1.6"
             android:orientation="horizontal">
 
             <br.cta.ipev.commom.instruments.NumericDisplay
@@ -317,7 +343,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0sp"
-            android:layout_weight="2"
+            android:layout_weight="1.6"
             android:orientation="horizontal">
 
             <br.cta.ipev.commom.instruments.NumericDisplay
@@ -335,7 +361,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="@string/valor"
-                custom:decimalPlaces="0" />
+                custom:decimalPlaces="1" />
 
             <br.cta.ipev.commom.instruments.NumericDisplay
                 android:id="@+id/txtNG"
@@ -406,9 +432,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:id="@+id/txt_charta_neg"
                     android:gravity="center"
                     android:textSize="18sp"
-                    android:text="VB Tol(-)" />
+                    android:text="Vi Tol(-)" />
 
                 <EditText
                     android:id="@+id/txtVBTolMin"
@@ -432,8 +459,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:id="@+id/txt_charta_pos"
                     android:textSize="18sp"
-                    android:text="VB Tol(+)" />
+                    android:text="Vi Tol(+)" />
 
                 <EditText
                     android:id="@+id/txtVBTolMax"
@@ -455,10 +483,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:id="@+id/txt_chartb_neg"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="18sp"
-                    android:text="Zpb Tol(-)" />
+                    android:text="Zp Tol(-)" />
 
                 <EditText
                     android:id="@+id/txtZPBTolMin"
@@ -481,9 +510,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:id="@+id/txt_chartb_pos"
                     android:gravity="center"
                     android:textSize="18sp"
-                    android:text="Zpb Tol(+)" />
+                    android:text="Zp Tol(+)" />
 
                 <EditText
                     android:id="@+id/txtZPBTolMax"
@@ -507,18 +537,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:id="@+id/txt_tipoStipChart"
                 android:orientation="vertical">
 
-                <br.cta.ipev.commom.instruments.NumericDisplay
-                    android:id="@+id/txtVB"
-                    style="@style/CalibAnemNome"
+
+                <Spinner
+                    android:id="@+id/spinnerTipoChartA"
+                    android:background="@color/bgNomeParametro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Vb" />
+                    android:layout_margin="2dp"
+                    android:minHeight="40dp" />
 
                 <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                    android:id="@+id/txtVBValorMax"
+                    android:id="@+id/txtChartAValorMax"
                     style="@style/CalibAnemMinMax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -529,7 +561,7 @@
                     custom:enableAlert="false"/>
 
                 <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                    android:id="@+id/txtVBValor"
+                    android:id="@+id/txtChartAValor"
                     style="@style/CalibAnemValor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -538,7 +570,7 @@
                     custom:decimalPlaces="0" />
 
                 <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                    android:id="@+id/txtVBValorMin"
+                    android:id="@+id/txtChartAValorMin"
                     style="@style/CalibAnemMinMax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -551,7 +583,7 @@
             </LinearLayout>
 
             <FrameLayout
-                android:id="@+id/chartDESVB"
+                android:id="@+id/stripchartA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10" />
@@ -568,16 +600,16 @@
                 android:layout_weight="2"
                 android:orientation="vertical">
 
-                <br.cta.ipev.commom.instruments.NumericDisplay
-                    android:id="@+id/txtZPB"
-                    style="@style/CalibAnemNome"
+                <Spinner
+                    android:id="@+id/spinnerTipoChartB"
+                    android:background="@color/bgNomeParametro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ZPB" />
+                    android:layout_margin="2dp"
+                    android:minHeight="40dp" />
 
                 <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                    android:id="@+id/txtZPBValorMax"
+                    android:id="@+id/txtChartBValorMax"
                     style="@style/CalibAnemMinMax"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
@@ -589,7 +621,7 @@
                     custom:enableAlert="false"/>
 
                 <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                    android:id="@+id/txtZPBValor"
+                    android:id="@+id/txtChartBValor"
                     style="@style/CalibAnemValor"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
@@ -599,7 +631,7 @@
                     custom:decimalPlaces="0" />
 
                 <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                    android:id="@+id/txtZPBValorMin"
+                    android:id="@+id/txtChartBValorMin"
                     style="@style/CalibAnemMinMax"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
@@ -614,7 +646,7 @@
             </LinearLayout>
 
             <FrameLayout
-                android:id="@+id/chartDESZPB"
+                android:id="@+id/stripchartB"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10">

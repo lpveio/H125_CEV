@@ -33,7 +33,7 @@ public class CoefsSAD1 extends CoefsSAD implements iCounts2UE {
 
     public static final int FF = 166 - OFFSET_IENA;
 
-    public static final int AUW = 25 - OFFSET_IENA;
+    public static final int AUW = 152 - OFFSET_IENA;
 
     public static final int NR = 168 - OFFSET_IENA;
 
@@ -47,7 +47,7 @@ public class CoefsSAD1 extends CoefsSAD implements iCounts2UE {
 
     public static final int OIL_PRESS = 202 - OFFSET_IENA;
 
-    public static final int TQ = 204 - OFFSET_IENA;
+    public static final int TRQ = 204 - OFFSET_IENA;
 
     public static final int N2 = 212 - OFFSET_IENA;
 
@@ -143,7 +143,7 @@ public class CoefsSAD1 extends CoefsSAD implements iCounts2UE {
         numBits = 19 + bitSinal;
         arincH125 = Conversion.extrairArincC105(mergeWords(counts[ALT_MSL], counts[ALT_MSL + 1]));
         arincH125 = arincH125 >> ( ARINCDataFieldSize - numBits);
-        result[Index.ALT_RATE.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.456;
+        result[Index.VZI.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.456;
 
         //GS_KN
         result[Index.GS_KN.ordinal()] =  Conversion.tcgvel(counts[GS_KN]);
@@ -210,9 +210,9 @@ public class CoefsSAD1 extends CoefsSAD implements iCounts2UE {
 
         //TQ
         numBits = 17 + bitSinal;
-        arincH125 = Conversion.extrairArincC105(mergeWords(counts[TQ], counts[TQ + 1]));
+        arincH125 = Conversion.extrairArincC105(mergeWords(counts[TRQ], counts[TRQ + 1]));
         arincH125 = arincH125 >> ( ARINCDataFieldSize - numBits);
-        result[Index.TQ.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.0004911 * 4;
+        result[Index.TRQ.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.0004911 * 4;
 
         //N2
         numBits = 17 + bitSinal;
@@ -221,49 +221,23 @@ public class CoefsSAD1 extends CoefsSAD implements iCounts2UE {
         result[Index.N2.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.001953 * 4;
 
 
-
-
         //Alt_203 (ZBP)
         numBits = 17 + bitSinal;
         arincH125 = Conversion.extrairArincC105(mergeWords(counts[ALT_203], counts[ALT_203 + 1]));
         arincH125 = arincH125 >> ( ARINCDataFieldSize - numBits);
-        result[Index.ZPB.ordinal()] = Conversion.TwosComplement(arincH125, numBits);
-
-        //ZPBMax
-        if (result[Index.ZPB.ordinal()] > ZPBMax) {
-            ZPBMax = result[Index.ZPB.ordinal()];
-        }
-        result[Index.ZPBMax.ordinal()] = ZPBMax;
-
-        //ZPBMin
-        if (result[Index.ZPB.ordinal()] < ZPBMin) {
-            ZPBMin = result[Index.ZPB.ordinal()];
-        }
-        result[Index.ZPBMin.ordinal()] = ZPBMin;
+        result[Index.ZPI.ordinal()] = Conversion.TwosComplement(arincH125, numBits);
 
         //Alt_Rate_212
         numBits = 11 + bitSinal;
         arincH125 = Conversion.extrairArincC105(mergeWords(counts[Alt_Rate_212], counts[Alt_Rate_212 + 1]));
         arincH125 = arincH125 >> ( ARINCDataFieldSize - numBits);
-        result[Index.ALT_RATE.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 16;
+        result[Index.VZI.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 16;
 
         //CAS_206 ( VB)
         numBits = 14 + bitSinal;
         arincH125 = Conversion.extrairArincC105(mergeWords(counts[CAS], counts[CAS + 1]));
         arincH125 = arincH125 >> ( ARINCDataFieldSize - numBits);
-        result[Index.VB.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.0625;
-
-        //VBMax
-        if (result[Index.VB.ordinal()] > VBMax) {
-            VBMax = result[Index.VB.ordinal()];
-        }
-        result[Index.VBMax.ordinal()] = VBMax;
-
-        //VbMin
-        if (result[Index.VB.ordinal()] < VBMin) {
-            VBMin = result[Index.VB.ordinal()];
-        }
-        result[Index.VBMin.ordinal()] = VBMin;
+        result[Index.VI.ordinal()] = Conversion.TwosComplement(arincH125, numBits) * 0.0625;
 
         //HDG_014
         numBits = 19 + bitSinal;

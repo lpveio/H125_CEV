@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/navy"
+            android:orientation="horizontal">
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTempo"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/TEMPO_UTC" />
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTempoValor"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="VALOR"
+                custom:show="timeValue"/>
+
+            <br.cta.ipev.commom.instruments.NumericDisplay
+                android:id="@+id/txtTOP"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="TOP" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtTOPValor"
+                style="@style/TempoValor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="VALOR" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="0.3">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!--<Button
+                android:id="@+id/btnStart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="@string/start" />
+
+            <Button
+                android:id="@+id/btnStop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_margin="6sp"
+                android:text="@string/stop"
+                android:background="@color/bgValorParametroVermelho"/>-->
+
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6sp"
+                android:id="@+id/btnControl"
+                android:textOn="@string/start"
+                android:textOff="@string/stop"
+                android:background="@drawable/tooglebutton_selector"
+                android:onClick="btnControlClick"/>
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="0dp"
+                android:backgroundTint="@color/red"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="@string/reset"
+                android:onClick="btnClearClick"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
+                <Spinner
+                    android:id="@+id/spinnerTipoChartA"
+                    android:background="@color/bgNomeParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                    android:id="@+id/txtAValor"
+                    style="@style/ValorParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor"
+                    custom:decimalPlaces="0" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chartA"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="0.3">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
+                <Spinner
+                    android:id="@+id/spinnerTipoChartB"
+                    android:background="@color/bgNomeParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                    android:id="@+id/txtBValor"
+                    style="@style/ValorParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor"
+                    custom:decimalPlaces="0" />
+            </LinearLayout>
+
+
+
+            <FrameLayout
+                android:id="@+id/chartB"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="0.3">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
+                <Spinner
+                    android:id="@+id/spinnerTipoChartC"
+                    android:layout_width="match_parent"
+                    android:background="@color/bgNomeParametro"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                    android:id="@+id/txtCValor"
+                    style="@style/ValorParametro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/valor"
+                    custom:decimalPlaces="0" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chartC"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="0.3">
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

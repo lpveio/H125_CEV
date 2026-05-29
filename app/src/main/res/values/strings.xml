@@ -3,6 +3,7 @@
     <string name="tempo">UTC</string>
     <string name="top">TOP</string>
     <string name="mem">MEM</string>
+    <string name="dgps">DGPS</string>
     <string name="valor">VALOR</string>
     <string name="act_name">Autorrotação - Configurações</string>
     <string name="confTol">Config. Tolerâncias</string>
@@ -10,8 +11,8 @@
     <string name="play">PLAY</string>
     <string name="pause">PAUSAR</string>
     <string name="reset">CLEAR</string>
-    <string name="start">START</string>
-    <string name="stop">STOP</string>
+    <string name="start">INICAR GRAVAÇÃO</string>
+    <string name="stop">PARAR GRAVAÇÃO</string>
     <string name="configurar">ALTERAR</string>
     <string name="OffsetOn">OFFSET Ligado</string>
     <string name="OffsetOff">OFFSET Desligado</string>

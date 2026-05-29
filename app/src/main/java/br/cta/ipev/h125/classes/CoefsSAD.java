@@ -34,15 +34,12 @@ public abstract class CoefsSAD implements resetValues {
         return ( (wHigh << 16) |  wLow);
     }
 
-
     @Override
     public void resetVB_VZB() {
-
         VBMax = Double.NEGATIVE_INFINITY;;
         VBMin = Double.POSITIVE_INFINITY;;
         ZPBMax = Double.NEGATIVE_INFINITY;;
         ZPBMin = Double.POSITIVE_INFINITY;;
-
     }
 
     @Override

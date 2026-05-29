@@ -1,10 +1,10 @@
 package br.cta.ipev.h125.telas;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
@@ -14,32 +14,53 @@ import com.scichart.charting.visuals.annotations.HorizontalLineAnnotation;
 import com.scichart.data.model.DoubleRange;
 import com.scichart.drawing.common.SolidPenStyle;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import br.cta.ipev.h125.AppManager;
-import br.cta.ipev.h125.replay.ReplayDisplay;
-import br.cta.ipev.h125.setup.Index;
 import br.cta.ipev.h125.R;
 import br.cta.ipev.h125.charts.StripChartInSecs;
 import br.cta.ipev.h125.charts.iStripChart;
 import br.cta.ipev.h125.databinding.ActivityCalibracaoAnemometricaBinding;
+import br.cta.ipev.h125.charts.ChartParameter;
+import br.cta.ipev.h125.replay.ReplayController;
+import br.cta.ipev.h125.setup.Index;
 import br.cta.isad.Display;
 import br.cta.misc.Convertions;
 
-public class CalibAnemo extends AppCompatActivity implements Display , ReplayDisplay {
+public class CalibAnemo extends AppCompatActivity implements Display {
 
     private ActivityCalibracaoAnemometricaBinding binding;
-    AppManager manager;
-    private iStripChart chartVB, chartZPB;
-    private SolidPenStyle penStyle = new SolidPenStyle(0xFF279B27, true, 2, new float[]{20, 20});
-    private boolean play=true;
-    private double zpb , zpbMin , zpbMax , vb , vbMin , vbMax ;
+
+    private AppManager manager;
+
+    private iStripChart chartA;
+    private iStripChart chartB;
+
+    private final SolidPenStyle penStyle = new SolidPenStyle(0xFF279B27, true, 2, new float[]{20, 20});
+
+    private boolean play = true;
+
+    private double chartAValue;
+    private double chartBValue;
+
+    private double chartAMax = Double.NEGATIVE_INFINITY;
+
+    private double chartAMin = Double.POSITIVE_INFINITY;
+
+    private double chartBMax = Double.NEGATIVE_INFINITY;
+
+    private double chartBMin = Double.POSITIVE_INFINITY;
+
+    private ChartParameter selectedChartA = ChartParameter.VI;
+    private ChartParameter selectedChartB = ChartParameter.ZPI;
 
     private HorizontalLineAnnotation limitHigh;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setLayout();
@@ -50,97 +71,257 @@ public class CalibAnemo extends AppCompatActivity implements Display , ReplayDis
     @Override
     public void update(double[] CVT) {
 
+        runOnUiThread(() -> {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
+            try {
 
-                        if (play) {
-                            try {
-                                long now = System.currentTimeMillis();
-                                double elapsedSeconds = (now) / 1000.0;
+                atualizarValoresTela(CVT);
+                atualizarChartsRealtime(CVT);
+                setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
 
-                                chartVB.plot(elapsedSeconds, vb);
-                                chartZPB.plot(elapsedSeconds, zpb);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-                            } catch (Exception e) {
-                                e.printStackTrace();
+    private void atualizarValoresTela(double[] CVT) {
+
+        binding.txtTempoValor.setText(Convertions.sec2dhms(CVT[Index.TEMPO.ordinal()]));
+        binding.txtTOPValue.setValue(CVT[Index.TOP.ordinal()]);
+        binding.txtFuelQtyKg.setValue(CVT[Index.FQTY.ordinal()]);
+        double fuelPercent = CVT[Index.FQTYP.ordinal()];
+
+        String fuelText = String.format(Locale.getDefault(), "%.2f%%", fuelPercent);
+
+        binding.txtFuelQtyPorc.setStringValue(fuelText);
+        binding.txtFLIValor.setValue(CVT[Index.FLI.ordinal()]);
+        binding.txtN2Valor.setValue(CVT[Index.N2.ordinal()]);
+        binding.txtNRValor.setValue(CVT[Index.NR.ordinal()]);
+        binding.txtN1Valor.setValue(CVT[Index.N1.ordinal()]);
+        binding.txtTRQValor.setValue(CVT[Index.TRQ.ordinal()]);
+        binding.txtTOTValor.setValue(CVT[Index.TOT.ordinal()]);
+        binding.txtFFValor.setValue(CVT[Index.FF.ordinal()]);
+        binding.txtRAValorr.setValue(CVT[Index.RALT.ordinal()]);
+        binding.txtTASValor.setValue(CVT[Index.TAS.ordinal()]);
+        binding.txtZPValor.setValue(CVT[Index.ZPI.ordinal()]);
+        binding.txtGSValor.setValue(CVT[Index.GS_KN.ordinal()]);
+        binding.txtOATValor.setValue(CVT[Index.SAT.ordinal()]);
+        binding.txtPSIValor.setValue(CVT[Index.HDG_MAG.ordinal()]);
+    }
+
+    private void atualizarChartsRealtime(double[] CVT) {
+
+        chartAValue = getChartValue(selectedChartA, CVT);
+        chartBValue = getChartValue(selectedChartB, CVT);
+
+        chartAMax = Math.max(chartAMax, chartAValue);
+        chartAMin = Math.min(chartAMin, chartAValue);
+        chartBMax = Math.max(chartBMax, chartBValue);
+        chartBMin = Math.min(chartBMin, chartBValue);
+
+        binding.txtChartAValor.setValue(chartAValue);
+        binding.txtChartAValorMin.setValue(chartAMin);
+        binding.txtChartAValorMax.setValue(chartAMax);
+        binding.txtChartBValor.setValue(chartBValue);
+        binding.txtChartBValorMin.setValue(chartBMin);
+        binding.txtChartBValorMax.setValue(chartBMax);
+
+        if (!play) {
+            return;
+        }
+
+        try {
+            long now = System.currentTimeMillis();
+            double elapsedSeconds = now / 1000.0;
+            chartA.plot(elapsedSeconds, chartAValue);
+            chartB.plot(elapsedSeconds, chartBValue);
+
+        } catch (Exception e) {
+            Log.e("ANEMO", "Erro plotando gráficos", e);
+        }
+    }
+
+    private void setLayout() {
+
+        binding = ActivityCalibracaoAnemometricaBinding.inflate(getLayoutInflater());
+
+        View view = binding.getRoot();
+        setContentView(view);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        binding.txtMEMValor.setOnClickListener(v -> {
+
+            if (binding.memStatus.getVisibility() == View.VISIBLE) {
+                binding.memStatus.setVisibility(View.GONE);
+
+            } else {
+                binding.memStatus.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void init() {
+        manager = (AppManager) getApplicationContext();
+        manager.addDisplay(this);
+    }
+
+    private void setCharts() {
+
+        List<ChartParameter> itens = Arrays.asList(ChartParameter.values());
+        ArrayAdapter<ChartParameter> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_chart, itens);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item_chart);
+        binding.spinnerTipoChartA.setAdapter(adapter);
+        binding.spinnerTipoChartB.setAdapter(adapter);
+        binding.spinnerTipoChartA.setSelection(0);
+        binding.spinnerTipoChartB.setSelection(1);
+        binding.spinnerTipoChartA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id
+                            ) {
+                                selectedChartA = itens.get(position);
+                                atualizarChartLabels();
+                            }
+
+                            @Override
+                            public void onNothingSelected(
+                                    AdapterView<?> parent
+                            ) {
+
                             }
                         }
+                );
 
-                        binding.txtTempoValor.setText(Convertions.sec2dhms(CVT[Index.TEMPO.ordinal()]));
-                        binding.txtTOPValue.setValue(CVT[Index.TOP.ordinal()]);
-                        binding.txtFuelQtyKg.setValue(CVT[Index.FQTY.ordinal()]);
-                        double valor = CVT[Index.FQTYP.ordinal()];
-                        String texto = String.format(Locale.getDefault(), "%.2f%%", valor);
-                        binding.txtFuelQtyPorc.setStringValue(texto);
-                        binding.txtFLIValor.setValue(CVT[Index.FLI.ordinal()]);
-                        binding.txtN2Valor.setValue(CVT[Index.N2.ordinal()]);
-                        binding.txtNRValor.setValue(CVT[Index.NR.ordinal()]);
-                        binding.txtN1Valor.setValue(CVT[Index.N1.ordinal()]);
-                        binding.txtTRQValor.setValue(CVT[Index.TQ.ordinal()]);
-                        binding.txtTOTValor.setValue(CVT[Index.TOT.ordinal()]);
-                        binding.txtFFValor.setValue(CVT[Index.FF.ordinal()]);
-                        binding.txtRAValorr.setValue(CVT[Index.RALT.ordinal()]);
-                        binding.txtTASValor.setValue(CVT[Index.TAS.ordinal()]);
-                        binding.txtGSValor.setValue(CVT[Index.GS_KN.ordinal()]);
-                        binding.txtOATValor.setValue(CVT[Index.SAT.ordinal()]);
-                        binding.txtPSIValor.setValue(CVT[Index.HDG_MAG.ordinal()]);
+        binding.spinnerTipoChartB.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                        zpb = CVT[Index.ZPB.ordinal()];
-                        binding.txtZPBValor.setValue(zpb);
-                        zpbMin = CVT[Index.ZPBMin.ordinal()];
-                        binding.txtZPBValorMin.setValue(zpbMin);
-                        zpbMax = CVT[Index.ZPBMax.ordinal()];
-                        binding.txtZPBValorMax.setValue(zpbMax);
-                        vb = CVT[Index.VB.ordinal()];
-                        binding.txtVBValor.setValue(vb);
-                        vbMin = CVT[Index.VBMin.ordinal()];
-                        binding.txtVBValorMin.setValue(vbMin);
-                        vbMax = CVT[Index.VBMax.ordinal()];
-                        binding.txtVBValorMax.setValue(vbMax);
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id
+                            ) {
 
-                        setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
+                                selectedChartB = itens.get(position);
+                                atualizarChartLabels();
+                            }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+                            @Override
+                            public void onNothingSelected(
+                                    AdapterView<?> parent
+                            ) {
 
+                            }
+                        }
+                );
+
+        chartA = new StripChartInSecs(this, new DoubleRange(0d, 1d), penStyle, 180);
+        binding.stripchartA.addView(chartA.getSurface());
+        chartA.build();
+
+        chartB = new StripChartInSecs(this, new DoubleRange(0d, 1d), penStyle, 180
+        );
+
+        binding.stripchartB.addView(chartB.getSurface());
+        chartB.build();
+        limitHigh = new HorizontalLineAnnotation(this);
+        atualizarChartLabels();
+    }
+
+    private void atualizarChartLabels() {
+
+        binding.txtChartaNeg.setText(selectedChartA.label + " Tol(-)");
+
+        binding.txtChartaPos.setText(selectedChartA.label + " Tol(+)"
+        );
+        binding.txtChartbNeg.setText(selectedChartB.label + " Tol(-)"
+        );
+        binding.txtChartbPos.setText(selectedChartB.label + " Tol(+)"
+        );
+    }
+
+    private double getChartValue(ChartParameter parameter, double[] CVT) {
+        return CVT[parameter.valueIndex.ordinal()];
     }
 
 
-    private void setMemoryStstus (int mem_counts) {
+    public void btnControlClick(View view) {
+
+        ToggleButton btnClicked = (ToggleButton) view;
+        play = !btnClicked.isChecked();
+    }
+
+    public void btnClearClick(View view) {
+
+        chartA.clear();
+        chartB.clear();
+        chartAMax = Double.NEGATIVE_INFINITY;
+        chartAMin = Double.POSITIVE_INFINITY;
+        chartBMax = Double.NEGATIVE_INFINITY;
+        chartBMin = Double.POSITIVE_INFINITY;
+    }
+
+    public void btnPlotClick(View view) {
+        plotarTolerancias();
+    }
+
+    private void plotarTolerancias() {
+
+        try {
+
+            double tolMinA = binding.txtVBTolMin.getText().length() == 0 ? 0 : Double.parseDouble(binding.txtVBTolMin.getText().toString());
+            double tolMaxA = binding.txtVBTolMax.getText().length() == 0 ? 0 : Double.parseDouble(binding.txtVBTolMax.getText().toString());
+
+
+            if (chartAValue > 100 && chartAValue < 400 ) {
+                chartA.plotLimit2(chartAValue, tolMaxA, tolMinA);
+            } else if ( chartAValue > 400) {
+                chartA.plotLimit(chartAValue, tolMaxA, tolMinA);
+            } else {
+                chartA.plotLimit3(chartAValue, tolMaxA, tolMinA);
+            }
+
+            double tolMinB = binding.txtZPBTolMin.getText().length() == 0 ? 0 : Double.parseDouble(binding.txtZPBTolMin.getText().toString());
+            double tolMaxB = binding.txtZPBTolMax.getText().length() == 0 ? 0 : Double.parseDouble(binding.txtZPBTolMax.getText().toString());
+
+            if (chartBValue > 100 && chartBValue < 400 ) {
+                chartB.plotLimit2(chartBValue, tolMaxB, tolMinB);
+            } else if ( chartBValue > 400) {
+                chartB.plotLimit(chartBValue, tolMaxB, tolMinB);
+            } else {
+                chartB.plotLimit3(chartBValue, tolMaxB, tolMinB);
+            }
+
+        } catch (Exception err) {
+
+            Log.e("ANEMO", "Erro plotando tolerâncias", err);
+        }
+    }
+
+    private void setMemoryStstus(int mem_counts) {
 
         int memory = (mem_counts >> 9) & 0x7F;
+
         int status_full = (mem_counts >> 8) & 0x01;
+
         int status_saving = (mem_counts >> 7) & 0x01;
+
         int error_code = mem_counts & 0x3F;
 
-        if (status_full == 1) {
-            binding.memStatusFull.setText("Mémoria Cheia: SIM");
-        } else {
-            binding.memStatusFull.setText("Mémoria Cheia: NÃO");
-        }
+        binding.memStatusFull.setText(status_full == 1 ? "Mémoria Cheia: SIM" : "Mémoria Cheia: NÃO");
 
-        if (status_saving == 1) {
-            binding.memStatusSaving.setText("Gravando: SIM");
-        } else {
-            binding.memStatusSaving.setText("Gravando: NÃO");
-        }
+        binding.memStatusSaving.setText(status_saving == 1 ? "Gravando: SIM" : "Gravando: NÃO");
 
         double porcentagem = (memory / 127.0) * 100.0;
 
+        String porcentagemString = String.format(Locale.getDefault(), "%.1f", porcentagem);
 
-        String porcentagem_string = String.format(Locale.getDefault(), "%.1f", porcentagem );
-
-        binding.memStatusOcupado.setText("Espaço Ocupado: " + porcentagem_string + "%");
-
+        binding.memStatusOcupado.setText("Espaço Ocupado: " + porcentagemString + "%");
 
         if (error_code == 0) {
-            binding.txtMEMValor.setText(porcentagem_string + "%");
+            binding.txtMEMValor.setText(porcentagemString + "%");
             binding.memStatusError.setText("Erros: " + error_code + "(: Log Mode + Ok)");
             binding.memStatusError.setTextColor(getResources().getColor(R.color.black));
             if (porcentagem > 80){
@@ -180,83 +361,10 @@ public class CalibAnemo extends AppCompatActivity implements Display , ReplayDis
         }
     }
 
-    private void setLayout() {
-        binding = ActivityCalibracaoAnemometricaBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
-        getSupportActionBar().hide();
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-
-        binding.txtMEMValor.setOnClickListener(v -> {
-            if (binding.memStatus.getVisibility() == View.VISIBLE) {
-                binding.memStatus.setVisibility(View.GONE);   // esconde
-            } else {
-                binding.memStatus.setVisibility(View.VISIBLE); // mostra
-            }
-        });
-    }
-
-    private void init() {
-        manager = ((AppManager) getApplicationContext());
-        manager.addDisplay(this);
-
-    }
-
-    private void setCharts() {
-
-        chartVB = new StripChartInSecs(this,new DoubleRange(0d,1d), penStyle,180);
-        FrameLayout chartVBLayout = (FrameLayout)findViewById(R.id.chartDESVB);
-        chartVBLayout.addView(chartVB.getSurface());
-        chartVB.build();
-
-        chartZPB = new StripChartInSecs(this,new DoubleRange(0d,1d), penStyle,180);
-        final FrameLayout chartZPBLayout = (FrameLayout)findViewById(R.id.chartDESZPB);
-        chartZPBLayout.addView(chartZPB.getSurface());
-        chartZPB.build();
-
-
-        limitHigh = new HorizontalLineAnnotation(this);
-
-    }
-
-    public void btnControlClick(View view){
-        ToggleButton btnClicked = (ToggleButton)view;
-        play = !btnClicked.isChecked();
-    }
-
-    public void btnClearClick(View view){
-        chartVB.clear();
-        chartZPB.clear();
-        manager.getActiveCoefs().resetVB_VZB();
-    }
-
-    public void btnPlotClick(View view){
-        plotarTolerancias();
-    }
-
-    private void plotarTolerancias(){
-
-        double tolMin, tolMax;
-
-        try {
-
-            tolMin = binding.txtVBTolMin.getText().length()==0?0:Double.parseDouble(binding.txtVBTolMin.getText().toString());
-            tolMax = binding.txtVBTolMax.getText().length()==0?0:Double.parseDouble(binding.txtVBTolMax.getText().toString());
-            chartVB.plotLimit2(vb,tolMax,tolMin);
-
-            tolMin = binding.txtZPBTolMin.getText().length()==0?0:Double.parseDouble(binding.txtZPBTolMin.getText().toString());
-            tolMax = binding.txtZPBTolMax.getText().length()==0?0:Double.parseDouble(binding.txtZPBTolMax.getText().toString());
-
-
-            chartZPB.plotLimit(zpb,tolMax,tolMin);
-        }
-        catch (Exception err){
-            Log.e("ANEMO", "Atualizando linha de limite de tolerância dos gráficos", err);
-        }
-    }
-
     @Override
-    public void onReplayFrame(double[] cvt) {
-
+    protected void onDestroy() {
+        super.onDestroy();
+        manager.removeDisplay(this);
     }
+
 }

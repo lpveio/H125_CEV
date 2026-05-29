@@ -56,13 +56,13 @@ public class Motores extends AppCompatActivity implements Display {
                     binding.txtN2Valor.setValue(CVT[Index.N2.ordinal()]);
                     binding.txtNRValor.setValue(CVT[Index.NR.ordinal()]);
                     binding.txtN1Valor.setValue(CVT[Index.N1.ordinal()]);
-                    binding.txtTRQValor.setValue(CVT[Index.TQ.ordinal()]);
+                    binding.txtTRQValor.setValue(CVT[Index.TRQ.ordinal()]);
                     binding.txtTOTValor.setValue(CVT[Index.TOT.ordinal()]);
                     binding.txtFFValor.setValue(CVT[Index.FF.ordinal()]);
                     binding.txtRAValor.setValue(CVT[Index.RALT.ordinal()]);
                     binding.txtOATValor.setValue(CVT[Index.SAT.ordinal()]);
-                    binding.txtZVBValor.setValue(CVT[Index.ZPB.ordinal()]);
-                    binding.txtVBValor.setValue(CVT[Index.VB.ordinal()]);
+                    binding.txtZVBValor.setValue(CVT[Index.ZPI.ordinal()]);
+                    binding.txtVBValor.setValue(CVT[Index.VI.ordinal()]);
 
                     setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
 
