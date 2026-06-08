@@ -80,6 +80,7 @@
     <string name="Long">Long</string>
     <string name="Alt">Alt (m)</string>
     <string name="PDOP">PDOP</string>
+    <string name="VDOP">VDOP</string>
     <string name="HDOP">HDOP</string>
     <string name="FixQuality">Fix Quality</string>
     <string name="Sats">Sats em Uso </string>

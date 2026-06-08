@@ -76,36 +76,32 @@ public class DataViewActivity extends ActivityGroup {
 
         setContentView(R.layout.activity_data_view);
 
-        setRequestedOrientation(
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        );
-
-        missionManager =
-                (AppManager) getApplicationContext();
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        missionManager = (AppManager) getApplicationContext();
         loadingAlert = new LoadingAlert(this);
-
         fileManager = new ReplayFileManager(this);
-
         linearReplay = findViewById(R.id.telareplay);
-
         btnPlay = findViewById(R.id.btnPlay);
-
         btnPause = findViewById(R.id.btnPause);
-
         btnReload = findViewById(R.id.btnRestart);
-
         seekBar = findViewById(R.id.seekBarReplay);
-
         spinnerReplay = findViewById(R.id.spinnerSpeed);
-
         spinnerTOP = findViewById(R.id.spinnerTop);
-
         logReader = new FlightLogReader();
 
-        controlReplay();
+        //Setar TRUE para app para pilot
+        boolean appPilot = false;
 
-        createDialog();
+
+        if (appPilot) {
+            createMission(1);
+            createTabs(1);
+
+        } else {
+            controlReplay();
+            createDialog();
+        }
+
     }
 
     // =========================================================
@@ -431,13 +427,9 @@ public class DataViewActivity extends ActivityGroup {
     private void createDialog() {
 
         View view = getLayoutInflater().inflate(R.layout.dialog_h125_option, null);
-
         RadioButton rbSAD01 = view.findViewById(R.id.rbSAD01);
-
         RadioButton rbSAD02 = view.findViewById(R.id.rbSAD02);
-
         LinearLayout layoutReplay = view.findViewById(R.id.layout_replay);
-
         Spinner spinnerReplay = view.findViewById(R.id.spinnerFiles);
 
         loadFiles(spinnerReplay);

@@ -37,7 +37,7 @@
             android:name=".telas.Comando_Voo"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".telas.Ralt"
+            android:name=".telas.Pilot"
             android:configChanges="orientation|screenLayout" />
         <activity
             android:name=".telas.Comando_Voo_2"

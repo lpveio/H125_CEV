@@ -7,35 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/landscape"
     android:baselineAligned="false">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0sp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_margin="2dp"
-        android:background="@drawable/custom_device_border">
 
-
-        <br.cta.ipev.commom.instruments.tapes.StripTape
-            android:layout_width="match_parent"
-            android:layout_height="0sp"
-            android:layout_weight="9"
-            style="@style/StripTapeParametrosPrimarios"
-            app:position="left"
-            app:paramScale="1"
-            app:scaleDecimalPlaces="0"
-            app:valueDecimalPlaces="0"
-            app:paramRange="10"
-            app:lineStrokeWidth="8"
-            app:boxBackgroundColor="@color/bgValorParametro"
-            app:paramShowedScale="1"
-            app:scaleFontSize="20sp"
-            app:valueFontSize="25sp"
-            app:valueNumberOfDigits="3"
-            app:paramValue="0"
-            android:id="@+id/tapeRA"/>
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="0sp"
         android:layout_height="match_parent"
@@ -50,12 +22,19 @@
             android:orientation="vertical"
             android:layout_marginBottom="10sp">
 
-            <br.cta.ipev.commom.compat.instruments.SingleDisplay
-                style="@style/Name_big"
+            <Spinner
+                android:id="@+id/spinnerPilot"
+                android:background="@color/bgNomeParametro"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/RA" />
+                android:layout_margin="2dp"
+                android:text="@string/RA"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:minHeight="40dp" />
+
             <br.cta.ipev.commom.compat.instruments.SingleDisplay
                 android:id="@+id/txtRAValue"
                 android:layout_width="match_parent"

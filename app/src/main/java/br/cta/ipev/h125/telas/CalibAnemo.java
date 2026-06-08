@@ -22,6 +22,7 @@ import br.cta.ipev.h125.AppManager;
 import br.cta.ipev.h125.R;
 import br.cta.ipev.h125.charts.StripChartInSecs;
 import br.cta.ipev.h125.charts.iStripChart;
+import br.cta.ipev.h125.classes.LogFileStatus;
 import br.cta.ipev.h125.databinding.ActivityCalibracaoAnemometricaBinding;
 import br.cta.ipev.h125.charts.ChartParameter;
 import br.cta.ipev.h125.replay.ReplayController;
@@ -32,7 +33,7 @@ import br.cta.misc.Convertions;
 public class CalibAnemo extends AppCompatActivity implements Display {
 
     private ActivityCalibracaoAnemometricaBinding binding;
-
+    LogFileStatus status = LogFileStatus.getInstance();
     private AppManager manager;
 
     private iStripChart chartA;
@@ -91,9 +92,16 @@ public class CalibAnemo extends AppCompatActivity implements Display {
         binding.txtTOPValue.setValue(CVT[Index.TOP.ordinal()]);
         binding.txtFuelQtyKg.setValue(CVT[Index.FQTY.ordinal()]);
         double fuelPercent = CVT[Index.FQTYP.ordinal()];
-
+        if (status.isRecording()) {
+            binding.txtDGPSValue.setText("GRAVANDO");
+            binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.black));
+            binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.white));
+        } else {
+            binding.txtDGPSValue.setText("OFF");
+            binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.white));
+            binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.red));
+        }
         String fuelText = String.format(Locale.getDefault(), "%.2f%%", fuelPercent);
-
         binding.txtFuelQtyPorc.setStringValue(fuelText);
         binding.txtFLIValor.setValue(CVT[Index.FLI.ordinal()]);
         binding.txtN2Valor.setValue(CVT[Index.N2.ordinal()]);

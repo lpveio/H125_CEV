@@ -171,7 +171,9 @@ public class BluetoothNovatelManager {
             // ==========================
             // ENVIA COMANDO AUTOMÁTICO
             // ==========================
-            write("LOG BT1 LOGFILESTATUS ONTIME 1");
+            write("LOG BT1 LOGFILESTATUS ONTIME 3");
+            write("LOG BT1 GPGSA ONTIME 3");
+
         }
 
         public void run() {

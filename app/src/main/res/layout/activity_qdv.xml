@@ -20,6 +20,12 @@
             style="@style/small_text" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            style="@style/small_text" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -28,11 +34,23 @@
             style="@style/small_text" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            style="@style/small_text" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/dgps"
             android:backgroundTint="@color/black"
+            style="@style/small_text" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
             style="@style/small_text" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
@@ -62,6 +80,12 @@
             style="@style/small_time" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            style="@style/small_text" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtTOPValue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -70,12 +94,25 @@
             style="@style/small_time" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            style="@style/small_text" />
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtDGPSValue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/valor"
             style="@style/small_time" />
+
+
+        <br.cta.ipev.commom.compat.instruments.SingleDisplay
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            style="@style/small_text" />
 
         <br.cta.ipev.commom.compat.instruments.SingleDisplay
             android:id="@+id/txtMEMValor"

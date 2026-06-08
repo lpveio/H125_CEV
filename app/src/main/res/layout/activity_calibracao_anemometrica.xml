@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.65"
             android:orientation="horizontal">
 
             <br.cta.ipev.commom.compat.instruments.SingleDisplay
@@ -36,6 +36,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:text="@string/dgps"
+                android:backgroundTint="@color/black"
+                style="@style/small_text" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:text="@string/mem"
                 android:backgroundTint="@color/black"
                 style="@style/small_text" />
@@ -45,7 +53,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.6"
             android:orientation="horizontal">
 
             <br.cta.ipev.commom.compat.instruments.SingleDisplay
@@ -60,6 +68,14 @@
 
             <br.cta.ipev.commom.compat.instruments.SingleDisplay
                 android:id="@+id/txtTOPValue"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/valor"
+                style="@style/small_time" />
+
+            <br.cta.ipev.commom.compat.instruments.SingleDisplay
+                android:id="@+id/txtDGPSValue"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

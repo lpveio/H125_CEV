@@ -9,12 +9,11 @@ import java.util.List;
 import br.cta.ipev.commom.instruments.odometers.AlertRange;
 import br.cta.ipev.commom.screen.BaseSetup;
 import br.cta.ipev.commom.screen.Tab;
-import br.cta.ipev.h125.replay.ReplayActivity;
 import br.cta.ipev.h125.telas.CalibAnemo;
 import br.cta.ipev.h125.telas.GNSS;
 import br.cta.ipev.h125.telas.Param_Replay;
 import br.cta.ipev.h125.telas.QDV;
-import br.cta.ipev.h125.telas.Ralt;
+import br.cta.ipev.h125.telas.Pilot;
 import br.cta.ipev.h125.telas.Schart_Replay;
 
 public class Setup extends BaseSetup{
@@ -22,7 +21,7 @@ public class Setup extends BaseSetup{
     @Override
     public List<Tab> getScreenTabs(boolean forTablets) {
         List<Tab>screenTabs = new ArrayList<Tab>();
-        screenTabs.add(0,new Tab("RA","RALT", Ralt.class,false,true));
+        screenTabs.add(0,new Tab("RA","RALT", Pilot.class,false,true));
         screenTabs.add(1,new Tab("QDV","PRINCIPAL", QDV.class,true,false));
        // screenTabs.add(1,new Tab("S-CHART","S-CHART", SChart.class,true,false));
         screenTabs.add(2,new Tab("Cal. Anem.","ANEMO", CalibAnemo.class,true,false));
