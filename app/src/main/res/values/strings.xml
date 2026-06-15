@@ -11,8 +11,10 @@
     <string name="play">PLAY</string>
     <string name="pause">PAUSAR</string>
     <string name="reset">CLEAR</string>
-    <string name="start">INICAR GRAVAÇÃO</string>
-    <string name="stop">PARAR GRAVAÇÃO</string>
+    <string name="start">INICIAR</string>
+    <string name="start_dgps">INICAR GRAVAÇÃO</string>
+    <string name="stop">PARAR</string>
+    <string name="stop_dgps">PARAR GRAVAÇÃO</string>
     <string name="configurar">ALTERAR</string>
     <string name="OffsetOn">OFFSET Ligado</string>
     <string name="OffsetOff">OFFSET Desligado</string>

@@ -46,6 +46,9 @@
             android:name=".telas.Motores"
             android:configChanges="orientation|screenSize" />
         <activity
+            android:name=".telas.Peso_Corrigido"
+            android:configChanges="orientation|screenSize" />
+        <activity
             android:name=".telas.QDV"
             android:configChanges="orientation|screenSize" />
         <activity

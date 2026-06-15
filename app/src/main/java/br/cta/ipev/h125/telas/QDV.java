@@ -1,16 +1,15 @@
 package br.cta.ipev.h125.telas;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.content.ContextCompat;
 import java.util.Locale;
-
 import br.cta.ipev.h125.AppManager;
-import br.cta.ipev.h125.classes.LogFileStatus;
+import br.cta.ipev.h125.gpsstatus.GNSSViewModel;
 import br.cta.ipev.h125.setup.Index;
 import br.cta.ipev.h125.R;
 import br.cta.ipev.h125.databinding.ActivityQdvBinding;
@@ -21,8 +20,6 @@ public class QDV extends AppCompatActivity implements Display {
 
     private ActivityQdvBinding binding;
     AppManager manager;
-    LogFileStatus status = LogFileStatus.getInstance();
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,29 +27,17 @@ public class QDV extends AppCompatActivity implements Display {
 
         setLayout();
         init();
-    }
+        setupObservers();
 
+    }
     @Override
     public void update(double[] CVT) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
-
                     binding.txtTempoValor.setText(Convertions.sec2dhms(CVT[Index.TEMPO.ordinal()]));
                     binding.txtFuelQtyKg.setValue(CVT[Index.FQTY.ordinal()]);
-
-                    //Log.d("", "status:" + status.isRecording());
-
-                    if (status.isRecording()) {
-                        binding.txtDGPSValue.setText("GRAVANDO");
-                        binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.black));
-                        binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.white));
-                    } else {
-                        binding.txtDGPSValue.setText("OFF");
-                        binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.white));
-                        binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.red));
-                    }
                     double valor = CVT[Index.FQTYP.ordinal()];
                     String texto = String.format(Locale.getDefault(), "%.2f%%", valor);
                     binding.txtFuelQtyPorc.setStringValue(texto);
@@ -77,8 +62,8 @@ public class QDV extends AppCompatActivity implements Display {
                     binding.txtTETAValor.setValue(CVT[Index.THETA.ordinal()]);
                     binding.txtAUWValor.setValue(CVT[Index.AUW.ordinal()]);
                     binding.txtPOleoValor.setValue(CVT[Index.OIL_PRESS.ordinal()]);
-
                     setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
+
 
 
                 } catch (Exception e) {
@@ -86,6 +71,51 @@ public class QDV extends AppCompatActivity implements Display {
                 }
             }
         });
+
+    }
+
+    private void setupObservers() {
+        manager.getGnssLiveData().observe(this, data -> {
+
+
+            if (data == null) return;
+            binding.txtSAtsValor.setText(String.valueOf(data.getSatellitesInUse()));
+            updateSatelliteIndicator(data.getSatellitesInUse());
+        });
+
+        manager.getLogLiveData().observe(this, data -> {
+            if (data == null) return;
+
+            if (data.isRecording()) {
+                binding.txtDGPSValue.setText("GRAVANDO");
+                binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.black));
+                binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.white));
+            } else {
+                binding.txtDGPSValue.setText("OFF");
+                binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.white));
+                binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.red));
+            }
+
+        });
+
+
+
+    }
+
+    private void updateSatelliteIndicator(int satellites) {
+
+        int color;
+        if (satellites < 4) {
+            color = ContextCompat.getColor(this, R.color.red);
+        } else if (satellites < 6) {
+            color = ContextCompat.getColor(this, R.color.yellow);
+        } else {
+            color = ContextCompat.getColor(this, R.color.green);
+        }
+
+        GradientDrawable drawable = (GradientDrawable) binding.txtSAtsValor.getBackground();
+        drawable.setColor(color);
+
     }
 
     private void setLayout() {

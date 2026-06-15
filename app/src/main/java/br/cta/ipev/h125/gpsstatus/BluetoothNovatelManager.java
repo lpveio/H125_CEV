@@ -143,6 +143,7 @@ public class BluetoothNovatelManager {
     }
 
     // Thread responsável por gerenciar o fluxo de dados recebidos (InputStream)
+
     private class ConnectedThread extends Thread {
         private final BluetoothSocket socket;
         private final InputStream inputStream;
@@ -202,7 +203,6 @@ public class BluetoothNovatelManager {
                 String fullCommand = command + "\r\n";
                 outputStream.write(fullCommand.getBytes(StandardCharsets.US_ASCII));
                 outputStream.flush();
-                Log.d(TAG, "CMD SENT: " + command);
 
             } catch (IOException e) {
 

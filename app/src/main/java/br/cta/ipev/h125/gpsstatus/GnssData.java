@@ -1,20 +1,5 @@
 package br.cta.ipev.h125.gpsstatus;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.RecyclerView;
-
-import net.sf.marineapi.nmea.util.SatelliteInfo;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import br.cta.ipev.h125.R;
-
 public class GnssData {
     private double latitude;
     private double longitude;
@@ -45,7 +30,6 @@ public class GnssData {
     public GnssData() {
         // Construtor vazio para facilitar atualizações parciais
     }
-
 
     public int getFixQuality() {return fixQuality;}
 
@@ -129,10 +113,6 @@ public class GnssData {
         this.sigmaTotal = (float) Math.sqrt(Math.pow(hrms, 2) + Math.pow(vrms, 2));
     }
 
-    public static class SatellitesViewModel extends ViewModel {
-        // TODO: Implement the ViewModel
-    }
-
     /* loaded from: classes.dex */
     public static class SatelliteModel {
         private float azimuth;
@@ -190,49 +170,4 @@ public class GnssData {
         }
     }
 
-    /* loaded from: classes.dex */
-    public static class SatellitesAdapter extends RecyclerView.Adapter<SatellitesAdapter.SatelliteViewHolder> {
-        private ArrayList<SatelliteInfo> satelliteList;
-
-        public SatellitesAdapter(List<SatelliteInfo> satellites) {
-            this.satelliteList = (ArrayList) satellites;
-        }
-
-        @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-        public SatelliteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new SatelliteViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_satellite, parent, false));
-        }
-
-        @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-        public void onBindViewHolder(SatelliteViewHolder holder, int position) {
-            String id = this.satelliteList.get(position).getId();
-            int noise = this.satelliteList.get(position).getNoise();
-            float elevation = this.satelliteList.get(position).getElevation();
-            float azimuth = this.satelliteList.get(position).getAzimuth();
-            holder.textSatId.setText(id);
-            holder.textSatcNo.setText(String.valueOf(noise));
-            holder.textSatElevation.setText(String.valueOf(elevation));
-            holder.textSatAzimuth.setText(String.valueOf(azimuth));
-        }
-
-        @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-        public int getItemCount() {
-            return this.satelliteList.size();
-        }
-
-        public static class SatelliteViewHolder extends RecyclerView.ViewHolder {
-            public TextView textSatAzimuth;
-            public TextView textSatElevation;
-            public TextView textSatId;
-            public TextView textSatcNo;
-
-            public SatelliteViewHolder(View itemView) {
-                super(itemView);
-                this.textSatId = (TextView) itemView.findViewById(R.id.textSatId);
-                this.textSatcNo = (TextView) itemView.findViewById(R.id.textSatcNo);
-                this.textSatElevation = (TextView) itemView.findViewById(R.id.textSatElevation);
-                this.textSatAzimuth = (TextView) itemView.findViewById(R.id.textSatAzimuth);
-            }
-        }
-    }
 }

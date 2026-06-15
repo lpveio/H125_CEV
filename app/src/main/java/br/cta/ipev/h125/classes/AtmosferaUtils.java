@@ -46,8 +46,6 @@ public class AtmosferaUtils {
             dzp = zpaux - zpaux2;
         }
 
-        double zpi = Math.round(zpaux / 20) * 20;
-
-        return zpi; // Retorna altitude ajustada
+        return Math.round(zpaux / 20) * 20; // Retorna altitude ajustada
     }
 }

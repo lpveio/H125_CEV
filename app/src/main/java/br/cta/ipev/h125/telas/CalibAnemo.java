@@ -1,5 +1,6 @@
 package br.cta.ipev.h125.telas;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.scichart.charting.visuals.annotations.HorizontalLineAnnotation;
 import com.scichart.data.model.DoubleRange;
@@ -25,6 +28,7 @@ import br.cta.ipev.h125.charts.iStripChart;
 import br.cta.ipev.h125.classes.LogFileStatus;
 import br.cta.ipev.h125.databinding.ActivityCalibracaoAnemometricaBinding;
 import br.cta.ipev.h125.charts.ChartParameter;
+import br.cta.ipev.h125.gpsstatus.GNSSViewModel;
 import br.cta.ipev.h125.replay.ReplayController;
 import br.cta.ipev.h125.setup.Index;
 import br.cta.isad.Display;
@@ -33,31 +37,22 @@ import br.cta.misc.Convertions;
 public class CalibAnemo extends AppCompatActivity implements Display {
 
     private ActivityCalibracaoAnemometricaBinding binding;
-    LogFileStatus status = LogFileStatus.getInstance();
     private AppManager manager;
-
+    private GNSSViewModel viewModel;
     private iStripChart chartA;
     private iStripChart chartB;
-
     private final SolidPenStyle penStyle = new SolidPenStyle(0xFF279B27, true, 2, new float[]{20, 20});
-
     private boolean play = true;
-
     private double chartAValue;
     private double chartBValue;
-
     private double chartAMax = Double.NEGATIVE_INFINITY;
-
     private double chartAMin = Double.POSITIVE_INFINITY;
-
     private double chartBMax = Double.NEGATIVE_INFINITY;
-
     private double chartBMin = Double.POSITIVE_INFINITY;
-
     private ChartParameter selectedChartA = ChartParameter.VI;
     private ChartParameter selectedChartB = ChartParameter.ZPI;
-
     private HorizontalLineAnnotation limitHigh;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,23 +62,54 @@ public class CalibAnemo extends AppCompatActivity implements Display {
         setLayout();
         init();
         setCharts();
+        setupObservers();
+    }
+
+
+    private void setupObservers() {
+        manager.getGnssLiveData().observe(this, data -> {
+            if (data == null) return;
+            binding.txtSAtsValor.setText(String.valueOf(data.getSatellitesInUse()));
+            updateSatelliteIndicator(data.getSatellitesInUse());
+
+        });
+
+        manager.getLogLiveData().observe(this, data -> {
+            if (data == null) return;
+
+            if (data.isRecording()) {
+                binding.txtDGPSValue.setText("GRAVANDO");
+                binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.black));
+                binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.white));
+            } else {
+                binding.txtDGPSValue.setText("OFF");
+                binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.white));
+                binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.red));
+            }
+
+        });
+
+
+
     }
 
     @Override
     public void update(double[] CVT) {
 
-        runOnUiThread(() -> {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    atualizarValoresTela(CVT);
+                    atualizarChartsRealtime(CVT);
+                    setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
 
-            try {
-
-                atualizarValoresTela(CVT);
-                atualizarChartsRealtime(CVT);
-                setMemoryStstus((int) CVT[Index.MEM.ordinal()]);
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
+
     }
 
     private void atualizarValoresTela(double[] CVT) {
@@ -92,15 +118,9 @@ public class CalibAnemo extends AppCompatActivity implements Display {
         binding.txtTOPValue.setValue(CVT[Index.TOP.ordinal()]);
         binding.txtFuelQtyKg.setValue(CVT[Index.FQTY.ordinal()]);
         double fuelPercent = CVT[Index.FQTYP.ordinal()];
-        if (status.isRecording()) {
-            binding.txtDGPSValue.setText("GRAVANDO");
-            binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.black));
-            binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.white));
-        } else {
-            binding.txtDGPSValue.setText("OFF");
-            binding.txtDGPSValue.setTextColor(getResources().getColor(R.color.white));
-            binding.txtDGPSValue.setBackgroundColor(getResources().getColor(R.color.red));
-        }
+
+
+
         String fuelText = String.format(Locale.getDefault(), "%.2f%%", fuelPercent);
         binding.txtFuelQtyPorc.setStringValue(fuelText);
         binding.txtFLIValor.setValue(CVT[Index.FLI.ordinal()]);
@@ -115,7 +135,10 @@ public class CalibAnemo extends AppCompatActivity implements Display {
         binding.txtZPValor.setValue(CVT[Index.ZPI.ordinal()]);
         binding.txtGSValor.setValue(CVT[Index.GS_KN.ordinal()]);
         binding.txtOATValor.setValue(CVT[Index.SAT.ordinal()]);
+        binding.txtVZIValor.setValue(CVT[Index.VZI.ordinal()]);
         binding.txtPSIValor.setValue(CVT[Index.HDG_MAG.ordinal()]);
+
+
     }
 
     private void atualizarChartsRealtime(double[] CVT) {
@@ -150,6 +173,22 @@ public class CalibAnemo extends AppCompatActivity implements Display {
         }
     }
 
+    private void updateSatelliteIndicator(int satellites) {
+
+        int color;
+        if (satellites < 5) {
+            color = ContextCompat.getColor(this, R.color.red);
+        } else if (satellites < 10) {
+            color = ContextCompat.getColor(this, R.color.yellow);
+        } else {
+            color = ContextCompat.getColor(this, R.color.green);
+        }
+
+        GradientDrawable drawable = (GradientDrawable) binding.txtSAtsValor.getBackground();
+        drawable.setColor(color);
+
+    }
+
     private void setLayout() {
 
         binding = ActivityCalibracaoAnemometricaBinding.inflate(getLayoutInflater());
@@ -177,6 +216,7 @@ public class CalibAnemo extends AppCompatActivity implements Display {
     private void init() {
         manager = (AppManager) getApplicationContext();
         manager.addDisplay(this);
+        viewModel = new ViewModelProvider(this).get(GNSSViewModel.class);
     }
 
     private void setCharts() {

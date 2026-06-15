@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import br.cta.ipev.commom.screen.Tab;
 import br.cta.ipev.h125.classes.CoefsSAD1;
+import br.cta.ipev.h125.gpsstatus.BluetoothNovatelManager;
 import br.cta.ipev.h125.replay.FlightLogReader;
 import br.cta.ipev.h125.replay.ReplayController;
 import br.cta.ipev.h125.replay.ReplayFileManager;
@@ -75,7 +77,7 @@ public class DataViewActivity extends ActivityGroup {
         checkAndRequestPermissions();
 
         setContentView(R.layout.activity_data_view);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         missionManager = (AppManager) getApplicationContext();
         loadingAlert = new LoadingAlert(this);
@@ -91,7 +93,6 @@ public class DataViewActivity extends ActivityGroup {
 
         //Setar TRUE para app para pilot
         boolean appPilot = false;
-
 
         if (appPilot) {
             createMission(1);
@@ -489,10 +490,11 @@ public class DataViewActivity extends ActivityGroup {
                                 );
 
                             } else {
-
                                 createMission(AppIndex);
                                 createTabs(AppIndex);
                             }
+
+                            saveTipoApp(AppIndex);
                         })
                 .show();
     }
@@ -503,8 +505,7 @@ public class DataViewActivity extends ActivityGroup {
 
     private int loadApp() {
 
-        SharedPreferences prefs =
-                getSharedPreferences(PREF_FILE_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(PREF_FILE_NAME, MODE_PRIVATE);
 
         return prefs.getInt("app", 1);
     }
@@ -526,6 +527,7 @@ public class DataViewActivity extends ActivityGroup {
 
         super.onDestroy();
         missionManager.stop();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     // =========================================================

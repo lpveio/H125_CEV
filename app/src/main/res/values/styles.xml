@@ -64,6 +64,10 @@
         <item name="android:textSize">@dimen/small</item>
     </style>
 
+    <style name="ssmall_time" parent="display_time">
+        <item name="android:textSize">@dimen/mini_small</item>
+    </style>
+
     <style name="medium_value" parent="display_value">
         <item name="android:textSize">@dimen/medium</item>
     </style>

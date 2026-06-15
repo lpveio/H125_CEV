@@ -6,7 +6,7 @@
     <string name="OAT">OAT (°C)</string>
     <string name="FF">FF (Kg/h)</string>
     <string name="FLI">FLI (%)</string>
-    <string name="FQUANT">FUEL QTD (kg e %)</string>
+    <string name="FQUANT">FQTD (kg e %)</string>
     <string name="NR2">NR/N2(rpm)</string>
     <string name="RPM1_R_2">RPM1/R/2 (%)</string>
     <string name="RPM1">RPM\u2081(%)</string>

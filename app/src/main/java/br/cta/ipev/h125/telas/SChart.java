@@ -13,6 +13,7 @@ import com.scichart.drawing.common.SolidPenStyle;
 
 import br.cta.ipev.commom.acquisition.Parameter;
 import br.cta.ipev.h125.AppManager;
+import br.cta.ipev.h125.charts.ChartRef;
 import br.cta.ipev.h125.setup.Index;
 import br.cta.ipev.h125.R;
 import br.cta.ipev.h125.charts.StripChartInSecs;
@@ -172,7 +173,8 @@ public class SChart extends AppCompatActivity implements Display {
 
 
      */
-    class ChartDDN extends ChartRef{
+
+    class ChartDDN extends ChartRef {
         private double deltaRange = 100;
         public ChartDDN(Parameter ref) {
             super(ref);

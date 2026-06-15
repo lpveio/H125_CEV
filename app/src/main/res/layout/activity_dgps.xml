@@ -26,8 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp">
+        android:layout_weight="1">
 
         <br.cta.ipev.commom.instruments.NumericDisplay
             style="@style/QDVNome"
@@ -199,7 +198,6 @@
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:layout_weight="1">
 
         <br.cta.ipev.commom.instruments.NumericDisplay
@@ -383,20 +381,7 @@
         android:orientation="horizontal"
         android:layout_weight="7">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
 
-
-
-            <br.cta.ipev.h125.gpsstatus.SkyPlotView
-                android:id="@id/skyPlot"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
 
 
         <LinearLayout
@@ -409,7 +394,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comando para Novatel:"
+                    android:textStyle="bold"
+                    android:textSize="10sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -424,13 +417,13 @@
 
             <Button
                 android:id="@+id/btnSendCommand"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/darkGreen"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:layout_marginBottom="20dp"
                 android:onClick="btnSendClick"
-                android:text="enviar" />
+                android:text="enviar COMANDO" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -451,31 +444,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.3"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:id="@+id/button_connectar"
                     android:backgroundTint="@color/bgNomeParametro"
                     android:onClick="btnConnectClick"
-                    android:text="CONECTAR" />
+                    android:text="CONECTAR BLUETOOTH" />
 
 
                 <ToggleButton
                     android:id="@+id/btnGPS"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:checked="false"
                     android:onClick="btnControlClick"
-                    android:textOff="@string/start"
-                    android:textOn="@string/stop" />
+                    android:textOff="@string/start_dgps"
+                    android:textOn="@string/stop_dgps" />
 
             </LinearLayout>
 

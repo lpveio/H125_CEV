@@ -4,7 +4,7 @@ import com.scichart.data.model.DoubleRange;
 
 import br.cta.ipev.commom.acquisition.Parameter;
 
-abstract class ChartRef implements iChartReference {
+public abstract class ChartRef implements iChartReference {
     protected Parameter ref;
     protected DoubleRange range;
     protected double deltaRange = 3.0;
